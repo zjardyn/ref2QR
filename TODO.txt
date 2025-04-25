@@ -1,0 +1,38 @@
+# To-Do List
+
+## Separation of Concerns & Organization
+- [x] Extract parsing logic for each file format into separate modules (e.g. `parsers/bibtex.py`, `parsers/ris.py`, etc.)
+- [x] Factor QR-code and logo overlay generation into a helper/service
+- [ ] Split main application routes and admin/maintenance routes into Flask Blueprints
+
+## Configuration
+- [ ] Move constants (`ALLOWED_EXTENSIONS`, `MAX_CONTENT_LENGTH`, `MAINTENANCE_KEY`, database URI) into `config.py` or environment variables
+- [ ] Ensure `requirements.txt` is up-to-date; consider adding a `Pipfile` or `poetry.lock`
+
+## Security & Validation
+- [ ] Use `secure_filename()` on uploads to prevent directory traversal
+- [ ] Validate MIME types in addition to file extensions
+- [ ] Protect admin/maintenance endpoints with CSRF tokens or switch them to POST-only
+- [ ] Rate-limit or firewall the cleanup endpoint
+- [ ] Replace `print()` calls with `app.logger.*`
+
+## Error Handling & Logging
+- [ ] Replace broad `except Exception:` blocks with specific exception catches
+- [ ] Return proper HTTP status codes or JSON error payloads on errors
+
+## Parser & Cleaning Logic
+- [ ] Update LaTeX-stripping regex in `clean_and_structure_entry` to handle commands (e.g. `r"\\[A-Za-z]+(?:\{([^}]*)\})?"`)
+- [ ] Validate XML root before assuming EndNote schema
+- [ ] Unit-test each parser in isolation
+
+## Database Layer
+- [ ] Consider migrating `entries` to a `JSONB` column in PostgreSQL
+- [ ] Add an index on `expires_at`
+- [ ] Use `session.delete()` instead of `Query.delete()` for ORM safety when relationships exist
+- [ ] Add features: extend expiration, paginate results
+
+## Miscellaneous Improvements
+- [ ] Add docstrings and type hints throughout the codebase
+- [ ] Apply code formatting (Black) and linting (flake8) with pre-commit hooks
+- [ ] Move inline CSS into static files under `static/`
+- [ ] Write automated tests for parsers and endpoints

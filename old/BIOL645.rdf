@@ -1,0 +1,2114 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Article rdf:about="http://www.nature.com/articles/s41579-020-0323-1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1740-1526,%201740-1534"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hatzenpichler</foaf:surname>
+                        <foaf:givenName>Roland</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Krukenberg</foaf:surname>
+                        <foaf:givenName>Viola</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Spietz</foaf:surname>
+                        <foaf:givenName>Rachel L.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jay</foaf:surname>
+                        <foaf:givenName>Zackary J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1592"/>
+        <dc:title>Next-generation physiology approaches to study microbiome function at single cell level</dc:title>
+        <dcterms:abstract>The function of cells in their native habitat often cannot be reliably predicted from genomic data or from physiology studies of isolates. Traditional experimental approaches to study the function of taxonomically and metabolically diverse microbiomes are limited by their destructive nature, low spatial resolution or low throughput. Recently developed technologies can offer new insights into cellular function in natural and human-made systems and how microorganisms interact with and shape the environments that they inhabit. In this Review , we provide an overview of these next-generation physiology approaches and discuss how the non-destructive analysis of cellular phenotypes, in combination with the separation of the target cells for downstream analyses, provide powerful new , complementary ways to study microbiome function. We anticipate that the widespread application of next-generation physiology approaches will transform the field of microbial ecology and dramatically improve our understanding of how microorganisms function in their native environment.</dcterms:abstract>
+        <dc:date>04/2020</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://www.nature.com/articles/s41579-020-0323-1</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-28 21:11:35</dcterms:dateSubmitted>
+        <bib:pages>241-256</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1740-1526,%201740-1534">
+        <prism:volume>18</prism:volume>
+        <dc:title>Nature Reviews Microbiology</dc:title>
+        <dc:identifier>DOI 10.1038/s41579-020-0323-1</dc:identifier>
+        <prism:number>4</prism:number>
+        <dcterms:alternative>Nat Rev Microbiol</dcterms:alternative>
+        <dc:identifier>ISSN 1740-1526, 1740-1534</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1592">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Hatzenpichler et al. - 2020 - Next-generation physiology approaches to study mic.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="http://www.nature.com/articles/s41467-019-10542-0">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2041-1723"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Couradeau</foaf:surname>
+                        <foaf:givenName>Estelle</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sasse</foaf:surname>
+                        <foaf:givenName>Joelle</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Goudeau</foaf:surname>
+                        <foaf:givenName>Danielle</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Nath</foaf:surname>
+                        <foaf:givenName>Nandita</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hazen</foaf:surname>
+                        <foaf:givenName>Terry C.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bowen</foaf:surname>
+                        <foaf:givenName>Ben P.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Chakraborty</foaf:surname>
+                        <foaf:givenName>Romy</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Malmstrom</foaf:surname>
+                        <foaf:givenName>Rex R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Northen</foaf:surname>
+                        <foaf:givenName>Trent R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1593"/>
+        <dc:title>Probing the active fraction of soil microbiomes using BONCAT-FACS</dc:title>
+        <dc:date>12/2019</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://www.nature.com/articles/s41467-019-10542-0</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-28 21:11:29</dcterms:dateSubmitted>
+        <bib:pages>2770</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2041-1723">
+        <prism:volume>10</prism:volume>
+        <dc:title>Nature Communications</dc:title>
+        <dc:identifier>DOI 10.1038/s41467-019-10542-0</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Nat Commun</dcterms:alternative>
+        <dc:identifier>ISSN 2041-1723</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1593">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Couradeau et al. - 2019 - Probing the active fraction of soil microbiomes us.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://onlinelibrary.wiley.com/doi/10.1111/1751-7915.12420">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:17517915"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Song</foaf:surname>
+                        <foaf:givenName>Yizhi</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kaster</foaf:surname>
+                        <foaf:givenName>Anne-Kristin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Vollmers</foaf:surname>
+                        <foaf:givenName>John</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Song</foaf:surname>
+                        <foaf:givenName>Yanqing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Davison</foaf:surname>
+                        <foaf:givenName>Paul A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Frentrup</foaf:surname>
+                        <foaf:givenName>Martinique</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Preston</foaf:surname>
+                        <foaf:givenName>Gail M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Thompson</foaf:surname>
+                        <foaf:givenName>Ian P.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Murrell</foaf:surname>
+                        <foaf:givenName>J. Colin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Yin</foaf:surname>
+                        <foaf:givenName>Huabing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hunter</foaf:surname>
+                        <foaf:givenName>C. Neil</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Huang</foaf:surname>
+                        <foaf:givenName>Wei E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1594"/>
+        <dc:title>Single-cell genomics based on Raman sorting reveals novel carotenoid-containing bacteria in the Red Sea</dc:title>
+        <dc:date>01/2017</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/10.1111/1751-7915.12420</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-28 21:11:27</dcterms:dateSubmitted>
+        <bib:pages>125-137</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:17517915">
+        <prism:volume>10</prism:volume>
+        <dc:title>Microbial Biotechnology</dc:title>
+        <dc:identifier>DOI 10.1111/1751-7915.12420</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Microb. Biotechnol.</dcterms:alternative>
+        <dc:identifier>ISSN 17517915</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1594">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Song et al. - 2017 - Single-cell genomics based on Raman sorting reveal.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Report rdf:about="http://biorxiv.org/lookup/doi/10.1101/850750">
+        <z:itemType>report</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+               <foaf:name>Microbiology</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Aldas-Vargas</foaf:surname>
+                        <foaf:givenName>Andrea</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hauptfeld</foaf:surname>
+                        <foaf:givenName>Ernestina</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hermes</foaf:surname>
+                        <foaf:givenName>Gerben D.A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Atashgahi</foaf:surname>
+                        <foaf:givenName>Siavash</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Smidt</foaf:surname>
+                        <foaf:givenName>Hauke</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Rijnaarts</foaf:surname>
+                        <foaf:givenName>Huub H.M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sutton</foaf:surname>
+                        <foaf:givenName>Nora B.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1612"/>
+        <dc:title>Exploring groundwater microbial communities for natural attenuation potential of micropollutants</dc:title>
+        <dcterms:abstract>Abstract
+          Groundwater is a key water resource, with 45.7% of all drinking water globally being extracted from groundwater. Maintaining good groundwater quality is thus crucial to secure drinking water. Micropollutants, such as pesticides, threaten groundwater quality which can be mitigated by biodegradation. Hence, exploring microbial communities in aquifers used for drinking water production is essential for understanding micropollutants biodegradation capacity. This study aimed at understanding the interaction between groundwater geochemistry, pesticide presence, and microbial communities in aquifers used for drinking water production. Two groundwater monitoring wells located in the northeast of The Netherlands and at 500 m distance from each other were sampled in 2014, 2015, 2016 and 2018. In both wells, water was extracted from five discrete depths ranging from 13 to 54 m and used to analyze geochemical parameters, pesticide concentrations and microbial community dynamics using 16S rRNA gene sequencing and qPCR. Groundwater geochemistry was stable throughout the study period and pesticides were heterogeneously distributed at low concentrations (μg/L range). Integration of the groundwater chemical and microbial data showed that geochemical parameters and pesticides exerted selective pressure on microbial communities. Furthermore, microbial communities in both wells showed a more similar composition in the deeper part of the aquifer as compared to shallow sections, suggesting vertical differences in hydrological connection. This study provides initial insights into microbial community composition and distribution in groundwater systems in relation to geochemical parameters. This information can contribute for the implementation of bioremediation technologies that guarantee safe drinking water production from clean aquifers.
+          
+            Importance section
+            Groundwater is an essential source of drinking water. However, its quality is threathened by the presence of micropollutants. Certain microorganisms are capable of degrading micropollutants. However, groundwater is an unexplored environment, where the biodegradation potential of naturally-present microorganisms is unknown. We thus explore how groundwater microbial ecology in shaped by groundwater composition, namely geochemical parameters and micropollutants. This is a first step towards understanding which microbial communities and environmental conditions support natural attenuation of micropollutants. This study thus provides a first step towards developing in situ bioremediation strategies to remove micropollutants from groundwater used for drinking water production.</dcterms:abstract>
+        <dc:date>2019-11-21</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>http://biorxiv.org/lookup/doi/10.1101/850750</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-09 17:34:26</dcterms:dateSubmitted>
+        <dc:description>DOI: 10.1101/850750</dc:description>
+        <z:type>preprint</z:type>
+    </bib:Report>
+    <z:Attachment rdf:about="#item_1612">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Aldas-Vargas et al. - 2019 - Exploring groundwater microbial communities for na.pdf</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.biorxiv.org/content/10.1101/850750v1.full.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-09 17:34:25</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.nature.com/articles/s41586-021-03494-3">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0028-0836,%201476-4687"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Liu</foaf:surname>
+                        <foaf:givenName>Yang</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Makarova</foaf:surname>
+                        <foaf:givenName>Kira S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Huang</foaf:surname>
+                        <foaf:givenName>Wen-Cong</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wolf</foaf:surname>
+                        <foaf:givenName>Yuri I.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Nikolskaya</foaf:surname>
+                        <foaf:givenName>Anastasia N.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>Xinxu</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Cai</foaf:surname>
+                        <foaf:givenName>Mingwei</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>Cui-Jing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Xu</foaf:surname>
+                        <foaf:givenName>Wei</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Luo</foaf:surname>
+                        <foaf:givenName>Zhuhua</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Cheng</foaf:surname>
+                        <foaf:givenName>Lei</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Koonin</foaf:surname>
+                        <foaf:givenName>Eugene V.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Li</foaf:surname>
+                        <foaf:givenName>Meng</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1618"/>
+        <dc:title>Expanded diversity of Asgard archaea and their relationships with eukaryotes</dc:title>
+        <dc:date>2021-05-27</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.nature.com/articles/s41586-021-03494-3</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-02 14:04:41</dcterms:dateSubmitted>
+        <bib:pages>553-557</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0028-0836,%201476-4687">
+        <prism:volume>593</prism:volume>
+        <dc:title>Nature</dc:title>
+        <dc:identifier>DOI 10.1038/s41586-021-03494-3</dc:identifier>
+        <prism:number>7860</prism:number>
+        <dcterms:alternative>Nature</dcterms:alternative>
+        <dc:identifier>ISSN 0028-0836, 1476-4687</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1618">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Liu et al. - 2021 - Expanded diversity of Asgard archaea and their rel.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="http://www.nature.com/articles/s41467-019-09364-x">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>10</prism:volume>
+                <dc:title>Nature Communications</dc:title>
+                <dc:identifier>DOI 10.1038/s41467-019-09364-x</dc:identifier>
+                <prism:number>1</prism:number>
+                <dcterms:alternative>Nat Commun</dcterms:alternative>
+                <dc:identifier>ISSN 2041-1723</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Seitz</foaf:surname>
+                        <foaf:givenName>Kiley W.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dombrowski</foaf:surname>
+                        <foaf:givenName>Nina</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Eme</foaf:surname>
+                        <foaf:givenName>Laura</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Spang</foaf:surname>
+                        <foaf:givenName>Anja</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lombard</foaf:surname>
+                        <foaf:givenName>Jonathan</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sieber</foaf:surname>
+                        <foaf:givenName>Jessica R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Teske</foaf:surname>
+                        <foaf:givenName>Andreas P.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ettema</foaf:surname>
+                        <foaf:givenName>Thijs J. G.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Baker</foaf:surname>
+                        <foaf:givenName>Brett J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1619"/>
+        <dc:title>Asgard archaea capable of anaerobic hydrocarbon cycling</dc:title>
+        <dc:date>12/2019</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://www.nature.com/articles/s41467-019-09364-x</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-02 14:04:35</dcterms:dateSubmitted>
+        <bib:pages>1822</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1619">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Seitz et al. - 2019 - Asgard archaea capable of anaerobic hydrocarbon cy.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="http://www.nature.com/articles/nature14447">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>521</prism:volume>
+                <dc:title>Nature</dc:title>
+                <dc:identifier>DOI 10.1038/nature14447</dc:identifier>
+                <prism:number>7551</prism:number>
+                <dcterms:alternative>Nature</dcterms:alternative>
+                <dc:identifier>ISSN 0028-0836, 1476-4687</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Spang</foaf:surname>
+                        <foaf:givenName>Anja</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Saw</foaf:surname>
+                        <foaf:givenName>Jimmy H.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Jørgensen</foaf:surname>
+                        <foaf:givenName>Steffen L.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zaremba-Niedzwiedzka</foaf:surname>
+                        <foaf:givenName>Katarzyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Martijn</foaf:surname>
+                        <foaf:givenName>Joran</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lind</foaf:surname>
+                        <foaf:givenName>Anders E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>van Eijk</foaf:surname>
+                        <foaf:givenName>Roel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Schleper</foaf:surname>
+                        <foaf:givenName>Christa</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Guy</foaf:surname>
+                        <foaf:givenName>Lionel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ettema</foaf:surname>
+                        <foaf:givenName>Thijs J. G.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1620"/>
+        <dc:title>Complex archaea that bridge the gap between prokaryotes and eukaryotes</dc:title>
+        <dc:date>5/2015</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>http://www.nature.com/articles/nature14447</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-11-02 14:04:28</dcterms:dateSubmitted>
+        <bib:pages>173-179</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1620">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Spang et al. - 2015 - Complex archaea that bridge the gap between prokar.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="#item_255">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Journal></bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Singer</foaf:surname>
+                        <foaf:givenName>Emily</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1621"/>
+        <dc:title>mongrel-microbe-tests-story-of-complex-life-20151029</dc:title>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Zotero</z:libraryCatalog>
+        <bib:pages>12</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1621">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Singer - mongrel-microbe-tests-story-of-complex-life-201510.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01216-5">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2049-2618"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dai</foaf:surname>
+                        <foaf:givenName>Dongjuan</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Brown</foaf:surname>
+                        <foaf:givenName>Connor</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bürgmann</foaf:surname>
+                        <foaf:givenName>Helmut</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Larsson</foaf:surname>
+                        <foaf:givenName>D. G. Joakim</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Nambi</foaf:surname>
+                        <foaf:givenName>Indumathi</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhang</foaf:surname>
+                        <foaf:givenName>Tong</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Flach</foaf:surname>
+                        <foaf:givenName>Carl-Fredrik</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pruden</foaf:surname>
+                        <foaf:givenName>Amy</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Vikesland</foaf:surname>
+                        <foaf:givenName>Peter J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_995"/>
+        <dc:title>Long-read metagenomic sequencing reveals shifts in associations of antibiotic resistance genes with mobile genetic elements from sewage to activated sludge</dc:title>
+        <dcterms:abstract>Background:  There is concern that the microbially rich activated sludge environment of wastewater treatment plants (WWTPs) may contribute to the dissemination of antibiotic resistance genes (ARGs). We applied long-read (nanopore) sequencing to profile ARGs and their neighboring genes to illuminate their fate in the activated sludge treatment by comparing their abundance, genetic locations, mobility potential, and bacterial hosts within activated sludge relative to those in influent sewage across five WWTPs from three continents.
+Results:  The abundances (gene copies per Gb of reads, aka gc/Gb) of all ARGs and those carried by putative patho‑gens decreased 75–90% from influent sewage (192-605 gc/Gb) to activated sludge (31-62 gc/Gb) at all five WWTPs. Long reads enabled quantification of the percent abundance of ARGs with mobility potential (i.e., located on plasmids or co-located with other mobile genetic elements (MGEs)). The abundance of plasmid-associated ARGs decreased at four of five WWTPs (from 40–73 to 31–68%), and ARGs co-located with transposable, integrative, and conjugative element hallmark genes showed similar trends. Most ARG-associated elements decreased 0.35–13.52% while integra‑tive and transposable elements displayed slight increases at two WWTPs (1.4–2.4%). While resistome and taxonomic compositions both shifted significantly, host phyla for chromosomal ARG classes remained relatively consistent, indicating vertical gene transfer via active biomass growth in activated sludge as the key pathway of chromosomal ARG dissemination.
+Conclusions:  Overall, our results suggest that the activated sludge process acted as a barrier against the proliferation of most ARGs, while those that persisted or increased warrant further attention.</dcterms:abstract>
+        <dc:date>12/2022</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01216-5</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-19 21:10:20</dcterms:dateSubmitted>
+        <bib:pages>20</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2049-2618">
+        <prism:volume>10</prism:volume>
+        <dc:title>Microbiome</dc:title>
+        <dc:identifier>DOI 10.1186/s40168-021-01216-5</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>Microbiome</dcterms:alternative>
+        <dc:identifier>ISSN 2049-2618</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_995">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Dai et al. - 2022 - Long-read metagenomic sequencing reveals shifts in.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="http://journal.frontiersin.org/article/10.3389/fmicb.2017.02594/full">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1664-302X"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Goordial</foaf:surname>
+                        <foaf:givenName>J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Altshuler</foaf:surname>
+                        <foaf:givenName>Ianina</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hindson</foaf:surname>
+                        <foaf:givenName>Katherine</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Chan-Yam</foaf:surname>
+                        <foaf:givenName>Kelly</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Marcolefas</foaf:surname>
+                        <foaf:givenName>Evangelos</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Whyte</foaf:surname>
+                        <foaf:givenName>Lyle G.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_996"/>
+        <dc:title>In Situ Field Sequencing and Life Detection in Remote (79°26′N) Canadian High Arctic Permafrost Ice Wedge Microbial Communities</dc:title>
+        <dcterms:abstract>Signiﬁcant progress is being made in the development of the next generation of low cost life detection instrumentation with much smaller size, mass and energy requirements. Here, we describe in situ life detection and sequencing in the ﬁeld in soils over laying ice wedges in polygonal permafrost terrain on Axel Heiberg Island, located in the Canadian high Arctic (79◦26′N), an analog to the polygonal permafrost terrain observed on Mars. The life detection methods used here include (1) the cryo-iPlate for culturing microorganisms using diffusion of in situ nutrients into semi-solid media (2) a Microbial Activity Microassay (MAM) plate (BIOLOG Ecoplate) for detecting viable extant microorganisms through a colourimetric assay, and (3) the Oxford Nanopore MinION for nucleic acid detection and sequencing of environmental samples and the products of MAM plate and cryo-iPlate. We obtained 39 microbial isolates using the cryo-iPlate, which included several putatively novel strains based on the 16S rRNA gene, including a Pedobacter sp. (96% closest similarity in GenBank) which we partially genome sequenced using the MinION. The MAM plate successfully identiﬁed an active community capable of L-serine metabolism, which was used for metagenomic sequencing with the MinION to identify the active and enriched community. A metagenome on environmental ice wedge soil samples was completed, with base calling and uplink/downlink carried out via satellite internet. Validation of MinION sequencing using the Illumina MiSeq platform was consistent with the results obtained with the MinION. The instrumentation and technology utilized here is pre-existing, low cost, low mass, low volume, and offers the prospect of equipping micro-rovers and micro-penetrators with aggressive astrobiological capabilities. Since potentially habitable astrobiology targets have been identiﬁed (RSLs on Mars, near subsurface water ice on Mars, the plumes and oceans of Europa and Enceladus), future astrobiology missions will certainly target these areas and there is a need for direct life detection instrumentation.</dcterms:abstract>
+        <dc:date>2017-12-20</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://journal.frontiersin.org/article/10.3389/fmicb.2017.02594/full</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-19 21:09:47</dcterms:dateSubmitted>
+        <bib:pages>2594</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1664-302X">
+        <prism:volume>8</prism:volume>
+        <dc:title>Frontiers in Microbiology</dc:title>
+        <dc:identifier>DOI 10.3389/fmicb.2017.02594</dc:identifier>
+        <dcterms:alternative>Front. Microbiol.</dcterms:alternative>
+        <dc:identifier>ISSN 1664-302X</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_996">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Goordial et al. - 2017 - In Situ Field Sequencing and Life Detection in Rem.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000294">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2057-5858"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>De Maio</foaf:surname>
+                        <foaf:givenName>Nicola</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Shaw</foaf:surname>
+                        <foaf:givenName>Liam P.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hubbard</foaf:surname>
+                        <foaf:givenName>Alasdair</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>George</foaf:surname>
+                        <foaf:givenName>Sophie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sanderson</foaf:surname>
+                        <foaf:givenName>Nicholas D.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Swann</foaf:surname>
+                        <foaf:givenName>Jeremy</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wick</foaf:surname>
+                        <foaf:givenName>Ryan</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>AbuOun</foaf:surname>
+                        <foaf:givenName>Manal</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Stubberfield</foaf:surname>
+                        <foaf:givenName>Emma</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hoosdally</foaf:surname>
+                        <foaf:givenName>Sarah J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Crook</foaf:surname>
+                        <foaf:givenName>Derrick W.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Peto</foaf:surname>
+                        <foaf:givenName>Timothy E. A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sheppard</foaf:surname>
+                        <foaf:givenName>Anna E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bailey</foaf:surname>
+                        <foaf:givenName>Mark J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Read</foaf:surname>
+                        <foaf:givenName>Daniel S.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Anjum</foaf:surname>
+                        <foaf:givenName>Muna F.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Walker</foaf:surname>
+                        <foaf:givenName>A. Sarah</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Stoesser</foaf:surname>
+                        <foaf:givenName>Nicole</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>on behalf of the REHAB consortium</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_997"/>
+        <dc:title>Comparison of long-read sequencing technologies in the hybrid assembly of complex bacterial genomes</dc:title>
+        <dcterms:abstract>Illumina sequencing allows rapid, cheap and accurate whole genome bacterial analyses, but short reads (&lt;300 bp) do not usually enable complete genome assembly. Long-read sequencing greatly assists with resolving complex bacterial genomes, particularly when combined with short-read Illumina data (hybrid assembly). However, it is not clear how different long-read sequencing methods affect hybrid assembly accuracy. Relative automation of the assembly process is also crucial to facilitating high-throughput complete bacterial genome reconstruction, avoiding multiple bespoke ﬁltering and data manipulation steps. In this study, we compared hybrid assemblies for 20 bacterial isolates, including two reference strains, using Illumina sequencing and long reads from either Oxford Nanopore Technologies (ONT) or SMRT Paciﬁc Biosciences (PacBio) sequencing platforms. We chose isolates from the family Enterobacteriaceae, as these frequently have highly plastic, repetitive genetic structures, and complete genome reconstruction for these species is relevant for a precise understanding of the epidemiology of antimicrobial resistance. We de novo assembled genomes using the hybrid assembler Unicycler and compared different read processing strategies, as well as comparing to long-read-only assembly with Flye followed by short-read polishing with Pilon. Hybrid assembly with either PacBio or ONT reads facilitated high-quality genome reconstruction, and was superior to the longread assembly and polishing approach evaluated with respect to accuracy and completeness. Combining ONT and Illumina reads fully resolved most genomes without additional manual steps, and at a lower consumables cost per isolate in our setting. Automated hybrid assembly is a powerful tool for complete and accurate bacterial genome assembly.</dcterms:abstract>
+        <dc:date>2019-09-01</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000294</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-19 21:09:22</dcterms:dateSubmitted>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2057-5858">
+        <prism:volume>5</prism:volume>
+        <dc:title>Microbial Genomics</dc:title>
+        <dc:identifier>DOI 10.1099/mgen.0.000294</dc:identifier>
+        <prism:number>9</prism:number>
+        <dc:identifier>ISSN 2057-5858</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_997">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>De Maio et al. - 2019 - Comparison of long-read sequencing technologies in.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://onlinelibrary.wiley.com/doi/abs/10.1890/150017">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1540-9309"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Amaral-Zettler</foaf:surname>
+                        <foaf:givenName>Linda A</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zettler</foaf:surname>
+                        <foaf:givenName>Erik R</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Slikas</foaf:surname>
+                        <foaf:givenName>Beth</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Boyd</foaf:surname>
+                        <foaf:givenName>Gregory D</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Melvin</foaf:surname>
+                        <foaf:givenName>Donald W</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Morrall</foaf:surname>
+                        <foaf:givenName>Clare E</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Proskurowski</foaf:surname>
+                        <foaf:givenName>Giora</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mincer</foaf:surname>
+                        <foaf:givenName>Tracy J</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1001"/>
+        <link:link rdf:resource="#item_1002"/>
+        <dc:title>The biogeography of the Plastisphere: implications for policy</dc:title>
+        <dcterms:abstract>Microplastics (particles less than 5 mm) numerically dominate marine debris and occur from coastal waters to mid-ocean gyres, where surface circulation concentrates them. Given the prevalence of plastic marine debris (PMD) and the rise in plastic production, the impacts of plastic on marine ecosystems will likely increase. Microscopic life (the “Plastisphere”) thrives on these tiny floating “islands” of debris and can be transported long distances. Using next-generation DNA sequencing, we characterized bacterial communities from water and plastic samples from the North Pacific and North Atlantic subtropical gyres to determine whether the composition of different Plastisphere communities reflects their biogeographic origins. We found that these communities differed between ocean basins – and to a lesser extent between polymer types – and displayed latitudinal gradients in species richness. Our research reveals some of the impacts of microplastics on marine biodiversity, demonstrates that the effects and fate of PMD may vary considerably in different parts of the global ocean, and suggests that PMD mitigation will require regional management efforts.</dcterms:abstract>
+        <dc:date>2015</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>The biogeography of the Plastisphere</z:shortTitle>
+        <z:libraryCatalog>Wiley Online Library</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/abs/10.1890/150017</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:45:32</dcterms:dateSubmitted>
+        <dc:description>_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1890/150017</dc:description>
+        <bib:pages>541-546</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1540-9309">
+        <prism:volume>13</prism:volume>
+        <dc:title>Frontiers in Ecology and the Environment</dc:title>
+        <dc:identifier>DOI 10.1890/150017</dc:identifier>
+        <prism:number>10</prism:number>
+        <dc:identifier>ISSN 1540-9309</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1001">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/150017</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:45:42</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1002">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Submitted Version</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://darchive.mblwhoilibrary.org/bitstream/1912/7709/1/150017.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:45:35</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="#item_275">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1751-7370"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zhao</foaf:surname>
+                        <foaf:givenName>Shiye</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zettler</foaf:surname>
+                        <foaf:givenName>Erik R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Amaral-Zettler</foaf:surname>
+                        <foaf:givenName>Linda A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mincer</foaf:surname>
+                        <foaf:givenName>Tracy J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1003"/>
+        <link:link rdf:resource="#item_1004"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Plastics</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Seawater</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Environmental Monitoring</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Biomass</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Carbon</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Conservation of Natural Resources</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Microbial carrying capacity and carbon biomass of plastic marine debris</dc:title>
+        <dcterms:abstract>Trillions of plastic debris fragments are floating at sea, presenting a substantial surface area for microbial colonization. Numerous cultivation-independent surveys have characterized plastic-associated microbial biofilms, however, quantitative studies addressing microbial carbon biomass are lacking. Our confocal laser scanning microscopy data show that early biofilm development on polyethylene, polypropylene, polystyrene, and glass substrates displayed variable cell size, abundance, and carbon biomass, whereas these parameters stabilized in mature biofilms. Unexpectedly, plastic substrates presented lower volume proportions of photosynthetic cells after 8 weeks, compared to glass. Early biofilms displayed the highest proportions of diatoms, which could influence the vertical transport of plastic debris. In total, conservative estimates suggest 2.1 × 1021 to 3.4 × 1021 cells, corresponding to about 1% of the microbial cells in the ocean surface microlayer (1.5 × 103 to 1.1 × 104 tons of carbon biomass), inhabit plastic debris globally. As an unnatural addition to sea surface waters, the large quantity of cells and biomass carried by plastic debris has the potential to impact biodiversity, autochthonous ecological functions, and biogeochemical cycles within the ocean.</dcterms:abstract>
+        <dc:date>2021-01</dc:date>
+        <z:language>eng</z:language>
+        <z:libraryCatalog>PubMed</z:libraryCatalog>
+        <dc:description>PMID: 32879460
+PMCID: PMC7852875</dc:description>
+        <bib:pages>67-77</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1751-7370">
+        <prism:volume>15</prism:volume>
+        <dc:title>The ISME journal</dc:title>
+        <dc:identifier>DOI 10.1038/s41396-020-00756-2</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>ISME J</dcterms:alternative>
+        <dc:identifier>ISSN 1751-7370</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1003">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.nature.com/articles/s41396-020-00756-2.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:44:39</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1004">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>PubMed entry</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>http://www.ncbi.nlm.nih.gov/pubmed/32879460</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:44:37</dcterms:dateSubmitted>
+        <z:linkMode>3</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://onlinelibrary.wiley.com/doi/abs/10.1111/1462-2920.15531">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1462-2920"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Oberbeckmann</foaf:surname>
+                        <foaf:givenName>Sonja</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bartosik</foaf:surname>
+                        <foaf:givenName>Daniel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Huang</foaf:surname>
+                        <foaf:givenName>Sixing</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Werner</foaf:surname>
+                        <foaf:givenName>Johannes</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hirschfeld</foaf:surname>
+                        <foaf:givenName>Claudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wibberg</foaf:surname>
+                        <foaf:givenName>Daniel</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Heiden</foaf:surname>
+                        <foaf:givenName>Stefan E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bunk</foaf:surname>
+                        <foaf:givenName>Boyke</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Overmann</foaf:surname>
+                        <foaf:givenName>Jörg</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Becher</foaf:surname>
+                        <foaf:givenName>Dörte</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kalinowski</foaf:surname>
+                        <foaf:givenName>Jörn</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Schweder</foaf:surname>
+                        <foaf:givenName>Thomas</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Labrenz</foaf:surname>
+                        <foaf:givenName>Matthias</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Markert</foaf:surname>
+                        <foaf:givenName>Stephanie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1006"/>
+        <link:link rdf:resource="#item_1005"/>
+        <dc:title>Genomic and proteomic profiles of biofilms on microplastics are decoupled from artificial surface properties</dc:title>
+        <dcterms:abstract>Microplastics in marine ecosystems are colonized by diverse prokaryotic and eukaryotic communities. How these communities and their functional profiles are shaped by the artificial surfaces remains broadly unknown. In order to close this knowledge gap, we set up an in situ experiment with pellets of the polyolefin polymer polyethylene (PE), the aromatic hydrocarbon polymer polystyrene (PS), and wooden beads along a coastal to estuarine gradient in the Baltic Sea, Germany. We used an integrated metagenomics/metaproteomics approach to evaluate the genomic potential as well as protein expression levels of aquatic plastic biofilms. Our results suggest that material properties had a minor influence on the plastic-associated assemblages, as genomic and proteomic profiles of communities associated with the structurally different polymers PE and PS were highly similar, hence polymer-unspecific. Instead, it seemed that these communities were shaped by biogeographic factors. Wood, on the other hand, induced the formation of substrate-specific biofilms and served as nutrient source itself. Our study indicates that, while PE and PS microplastics may be relevant in the photic zone as opportunistic colonization grounds for phototrophic microorganisms, they appear not to be subject to biodegradation or serve as vectors for pathogenic microorganisms in marine habitats.</dcterms:abstract>
+        <dc:date>2021</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>Wiley Online Library</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/abs/10.1111/1462-2920.15531</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:41:43</dcterms:dateSubmitted>
+        <dc:description>_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/1462-2920.15531</dc:description>
+        <bib:pages>3099-3115</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1462-2920">
+        <prism:volume>23</prism:volume>
+        <dc:title>Environmental Microbiology</dc:title>
+        <dc:identifier>DOI 10.1111/1462-2920.15531</dc:identifier>
+        <prism:number>6</prism:number>
+        <dc:identifier>ISSN 1462-2920</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1006">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/1462-2920.15531</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:41:44</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1005">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://sfamjournals.onlinelibrary.wiley.com/doi/10.1111/1462-2920.15531</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:41:51</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0217165">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1932-6203"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pinto</foaf:surname>
+                        <foaf:givenName>Maria</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Langer</foaf:surname>
+                        <foaf:givenName>Teresa M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hüffer</foaf:surname>
+                        <foaf:givenName>Thorsten</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hofmann</foaf:surname>
+                        <foaf:givenName>Thilo</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Herndl</foaf:surname>
+                        <foaf:givenName>Gerhard J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1008"/>
+        <link:link rdf:resource="#item_1007"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Plastics</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Bacteria</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Polymers</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Bacterial biofilms</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Glass</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Polyvinyl chloride</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Solar radiation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Sunlight</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>The composition of bacterial communities associated with plastic biofilms differs between different polymers and stages of biofilm succession</dc:title>
+        <dcterms:abstract>Once in the ocean, plastics are rapidly colonized by complex microbial communities. Factors affecting the development and composition of these communities are still poorly understood. Additionally, whether there are plastic-type specific communities developing on different plastics remains enigmatic. We determined the development and succession of bacterial communities on different plastics under ambient and dim light conditions in the coastal Northern Adriatic over the course of two months using scanning electron microscopy and 16S rRNA gene analyses. Plastics used were low- and high-density polyethylene (LDPE and HDPE, respectively), polypropylene (PP) and polyvinyl chloride with two typical additives (PVC DEHP and PVC DINP). The bacterial communities developing on the plastics clustered in two groups; one group was found on PVC and the other group on all the other plastics and on glass, which was used as an inert control. Specific bacterial taxa were found on specific surfaces in essentially all stages of biofilm development and in both ambient and dim light conditions. Differences in bacterial community composition between the different plastics and light exposures were stronger after an incubation period of one week than at the later stages of the incubation. Under both ambient and dim light conditions, one part of the bacterial community was common on all plastic types, especially in later stages of the biofilm development, with families such as Flavobacteriaceae, Rhodobacteraceae, Planctomycetaceae and Phyllobacteriaceae presenting relatively high relative abundances on all surfaces. Another part of the bacterial community was plastic-type specific. The plastic-type specific fraction was variable among the different plastic types and was more abundant after one week of incubation than at later stages of the succession.</dcterms:abstract>
+        <dc:date>Jun 5, 2019</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>PLoS Journals</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0217165</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:40:22</dcterms:dateSubmitted>
+        <dc:description>Publisher: Public Library of Science</dc:description>
+        <bib:pages>e0217165</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1932-6203">
+        <prism:volume>14</prism:volume>
+        <dc:title>PLOS ONE</dc:title>
+        <dc:identifier>DOI 10.1371/journal.pone.0217165</dc:identifier>
+        <prism:number>6</prism:number>
+        <dcterms:alternative>PLOS ONE</dcterms:alternative>
+        <dc:identifier>ISSN 1932-6203</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1008">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0217165&amp;type=printable</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:40:24</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1007">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0217165</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:40:34</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.nature.com/articles/s41396-020-00814-9">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>15</prism:volume>
+                <dc:title>The ISME Journal</dc:title>
+                <dc:identifier>DOI 10.1038/s41396-020-00814-9</dc:identifier>
+                <prism:number>3</prism:number>
+                <dcterms:alternative>ISME J</dcterms:alternative>
+                <dc:identifier>ISSN 1751-7370</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wright</foaf:surname>
+                        <foaf:givenName>Robyn J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Langille</foaf:surname>
+                        <foaf:givenName>Morgan G. I.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Walker</foaf:surname>
+                        <foaf:givenName>Tony R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1010"/>
+        <link:link rdf:resource="#item_1009"/>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Microbial ecology</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Microbiome</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Soil microbiology</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Water microbiology</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Food or just a free ride? A meta-analysis reveals the global diversity of the Plastisphere</dc:title>
+        <dcterms:abstract>It is now indisputable that plastics are ubiquitous and problematic in ecosystems globally. Many suggestions have been made about the role that biofilms colonizing plastics in the environment—termed the “Plastisphere”—may play in the transportation and ecological impact of these plastics. By collecting and re-analyzing all raw 16S rRNA gene sequencing and metadata from 2,229 samples within 35 studies, we have performed the first meta-analysis of the Plastisphere in marine, freshwater, other aquatic (e.g., brackish or aquaculture) and terrestrial environments. We show that random forest models can be trained to differentiate between groupings of environmental factors as well as aspects of study design, but—crucially—also between plastics when compared with control biofilms and between different plastic types and community successional stages. Our meta-analysis confirms that potentially biodegrading Plastisphere members, the hydrocarbonoclastic Oceanospirillales and Alteromonadales are consistently more abundant in plastic than control biofilm samples across multiple studies and environments. This indicates the predilection of these organisms for plastics and confirms the urgent need for their ability to biodegrade plastics to be comprehensively tested. We also identified key knowledge gaps that should be addressed by future studies.</dcterms:abstract>
+        <dc:date>2021-03</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Food or just a free ride?</z:shortTitle>
+        <z:libraryCatalog>www.nature.com</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.nature.com/articles/s41396-020-00814-9</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:37:37</dcterms:dateSubmitted>
+        <dc:rights>2020 The Author(s)</dc:rights>
+        <dc:description>Number: 3
+Publisher: Nature Publishing Group</dc:description>
+        <bib:pages>789-806</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1010">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.nature.com/articles/s41396-020-00814-9.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:37:40</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1009">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.nature.com/articles/s41396-020-00814-9</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:37:44</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://journals.asm.org/doi/10.1128/jb.46.1.39-56.1943">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0021-9193,%201098-5530"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zobell</foaf:surname>
+                        <foaf:givenName>Claude E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1011"/>
+        <dc:title>The Effect of Solid Surfaces upon Bacterial Activity</dc:title>
+        <dc:date>07/1943</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.asm.org/doi/10.1128/jb.46.1.39-56.1943</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:36:35</dcterms:dateSubmitted>
+        <bib:pages>39-56</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0021-9193,%201098-5530">
+        <prism:volume>46</prism:volume>
+        <dc:title>Journal of Bacteriology</dc:title>
+        <dc:identifier>DOI 10.1128/jb.46.1.39-56.1943</dc:identifier>
+        <prism:number>1</prism:number>
+        <dcterms:alternative>J Bacteriol</dcterms:alternative>
+        <dc:identifier>ISSN 0021-9193, 1098-5530</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1011">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Zobell - 1943 - The Effect of Solid Surfaces upon Bacterial Activi.pdf</dc:title>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0200574">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>13</prism:volume>
+                <dc:title>PLOS ONE</dc:title>
+                <dc:identifier>DOI 10.1371/journal.pone.0200574</dc:identifier>
+                <prism:number>8</prism:number>
+                <dcterms:alternative>PLOS ONE</dcterms:alternative>
+                <dc:identifier>ISSN 1932-6203</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Royer</foaf:surname>
+                        <foaf:givenName>Sarah-Jeanne</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ferrón</foaf:surname>
+                        <foaf:givenName>Sara</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wilson</foaf:surname>
+                        <foaf:givenName>Samuel T.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Karl</foaf:surname>
+                        <foaf:givenName>David M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1013"/>
+        <link:link rdf:resource="#item_1012"/>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Polyethylene</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Plastics</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Polymers</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Solar radiation</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Sunlight</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Gases</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Hydrocarbons</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Oceans</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Production of methane and ethylene from plastic in the environment</dc:title>
+        <dcterms:abstract>Mass production of plastics started nearly 70 years ago and the production rate is expected to double over the next two decades. While serving many applications because of their durability, stability and low cost, plastics have deleterious effects on the environment. Plastic is known to release a variety of chemicals during degradation, which has a negative impact on biota. Here, we show that the most commonly used plastics produce two greenhouse gases, methane and ethylene, when exposed to ambient solar radiation. Polyethylene, which is the most produced and discarded synthetic polymer globally, is the most prolific emitter of both gases. We demonstrate that the production of trace gases from virgin low-density polyethylene increase with time, with rates at the end of a 212-day incubation of 5.8 nmol g-1 d-1 of methane, 14.5 nmol g-1 d-1 of ethylene, 3.9 nmol g-1 d-1 of ethane and 9.7 nmol g-1 d-1 of propylene. Environmentally aged plastics incubated in water for at least 152 days also produced hydrocarbon gases. In addition, low-density polyethylene emits these gases when incubated in air at rates ~2 times and ~76 times higher than when incubated in water for methane and ethylene, respectively. Our results show that plastics represent a heretofore unrecognized source of climate-relevant trace gases that are expected to increase as more plastic is produced and accumulated in the environment.</dcterms:abstract>
+        <dc:date>Aug 1, 2018</dc:date>
+        <z:language>en</z:language>
+        <z:libraryCatalog>PLoS Journals</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0200574</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:33:16</dcterms:dateSubmitted>
+        <dc:description>Publisher: Public Library of Science</dc:description>
+        <bib:pages>e0200574</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1013">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0200574&amp;type=printable</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:33:18</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1012">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0200574</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:33:29</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.int-res.com/abstracts/ame/v09/n1/p87-96/">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0948-3055,%201616-1564"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ke</foaf:surname>
+                        <foaf:givenName>Cooksey</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>B</foaf:surname>
+                        <foaf:givenName>Wigglesworth-Cooksey</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1015"/>
+        <link:link rdf:resource="#item_1014"/>
+        <dc:subject>
+            <z:AutomaticTag>
+                <rdf:value>Diatoms . Bacteria . Adhesion . Motility . Marine</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Adhesion of bacteria and diatoms to surfaces in the sea: a review</dc:title>
+        <dcterms:abstract>The initial event in biofilm formation on marine surfaces is the adsorption of an organic layer. This is followed usually by microorganisms and more developed forms, but there appears to be no obligatory order in this succession. The influence of the
+substratum chemistry on the rate and the extent of adhesion of microorganisms is still not fully agreed because many types of organisms in differing physiological states have been used, making consensus difficult. Sometimes the surface chemistry of the
+substratum was not established, which further clouds the picture. Genetic evidence now supports the idea that surface proximity promotes the induction of new metabolic capabilities in microorganisms, however the environmental signal responsible for this
+is not agreed. We propose that restricted diffusion at a surface plays a role in the process. Support for the hypothesis that the biofilm matrix polymers are not the adhesives involved in the initial attachment of cells to surfaces is growing. Diatom
+adhesion is a more complicated process than that for bacteria and requires glycoprotein and protein synthesis as well as metabolic energy, i.e. it is not a passive process. Bacteria can utilize surface-bound substrates and it is possible that diatoms
+attached to sediment grains can exploit their attached existence also by moving along concentration gradients of dissolved organic substances in adjacent pore waters. Practical interest in the adhesion of marine microorganisms derives from their role in
+the degradation of man-made structures. A film of organisms only a few microns in thickness causes the hydrodynamic drag on a ship to increase considerably. Investigations of the means by which marine microorganisms adhere to surfaces have been taking
+place for more that 50 yr, yet we still do not understand completely the mechanisms involved.</dcterms:abstract>
+        <dc:date>1995-04-28</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Adhesion of bacteria and diatoms to surfaces in the sea</z:shortTitle>
+        <z:libraryCatalog>www.int-res.com</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.int-res.com/abstracts/ame/v09/n1/p87-96/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:23:55</dcterms:dateSubmitted>
+        <bib:pages>87-96</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0948-3055,%201616-1564">
+        <prism:volume>09</prism:volume>
+        <dc:title>Aquatic Microbial Ecology</dc:title>
+        <dc:identifier>DOI 10.3354/ame009087</dc:identifier>
+        <prism:number>1</prism:number>
+        <dc:identifier>ISSN 0948-3055, 1616-1564</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1015">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.int-res.com/articles/ame/9/a009p087.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:23:58</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1014">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.int-res.com/abstracts/ame/v09/n1/p87-96/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:24:08</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://journals.asm.org/doi/10.1128/mBio.00036-12">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>3</prism:volume>
+                <dc:title>mBio</dc:title>
+                <dc:identifier>DOI 10.1128/mBio.00036-12</dc:identifier>
+                <prism:number>2</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Morris</foaf:surname>
+                        <foaf:givenName>J. Jeffrey</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Lenski</foaf:surname>
+                        <foaf:givenName>Richard E.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zinser</foaf:surname>
+                        <foaf:givenName>Erik R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1016"/>
+        <dc:title>The Black Queen Hypothesis: Evolution of Dependencies through Adaptive Gene Loss</dc:title>
+        <dc:date>2012-03-23</dc:date>
+        <z:shortTitle>The Black Queen Hypothesis</z:shortTitle>
+        <z:libraryCatalog>journals.asm.org (Atypon)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.asm.org/doi/10.1128/mBio.00036-12</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:21:20</dcterms:dateSubmitted>
+        <dc:description>Publisher: American Society for Microbiology</dc:description>
+        <bib:pages>e00036-12</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_1016">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.asm.org/doi/pdf/10.1128/mBio.00036-12</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:21:21</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5411777/">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1088-9051"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Nurk</foaf:surname>
+                        <foaf:givenName>Sergey</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Meleshko</foaf:surname>
+                        <foaf:givenName>Dmitry</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Korobeynikov</foaf:surname>
+                        <foaf:givenName>Anton</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pevzner</foaf:surname>
+                        <foaf:givenName>Pavel A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1017"/>
+        <link:link rdf:resource="#item_1018"/>
+        <dc:title>metaSPAdes: a new versatile metagenomic assembler</dc:title>
+        <dcterms:abstract>While metagenomics has emerged as a technology of choice for analyzing bacterial populations, the assembly of metagenomic data remains challenging, thus stifling biological discoveries. Moreover, recent studies revealed that complex bacterial populations may be composed from dozens of related strains, thus further amplifying the challenge of metagenomic assembly. metaSPAdes addresses various challenges of metagenomic assembly by capitalizing on computational ideas that proved to be useful in assemblies of single cells and highly polymorphic diploid genomes. We benchmark metaSPAdes against other state-of-the-art metagenome assemblers and demonstrate that it results in high-quality assemblies across diverse data sets.</dcterms:abstract>
+        <dc:date>2017-5</dc:date>
+        <z:shortTitle>metaSPAdes</z:shortTitle>
+        <z:libraryCatalog>PubMed Central</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5411777/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:20:18</dcterms:dateSubmitted>
+        <dc:description>PMID: 28298430
+PMCID: PMC5411777</dc:description>
+        <bib:pages>824-834</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1088-9051">
+        <prism:volume>27</prism:volume>
+        <dc:title>Genome Research</dc:title>
+        <dc:identifier>DOI 10.1101/gr.213959.116</dc:identifier>
+        <prism:number>5</prism:number>
+        <dcterms:alternative>Genome Res</dcterms:alternative>
+        <dc:identifier>ISSN 1088-9051</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1017">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>PubMed Central Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5411777/pdf/824.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:20:19</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1018">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>PubMed Central Link</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5411777/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:20:18</dcterms:dateSubmitted>
+        <z:linkMode>3</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://genome.cshlp.org/content/25/7/1043">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1088-9051,%201549-5469"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Parks</foaf:surname>
+                        <foaf:givenName>Donovan H.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Imelfort</foaf:surname>
+                        <foaf:givenName>Michael</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Skennerton</foaf:surname>
+                        <foaf:givenName>Connor T.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hugenholtz</foaf:surname>
+                        <foaf:givenName>Philip</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Tyson</foaf:surname>
+                        <foaf:givenName>Gene W.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1020"/>
+        <link:link rdf:resource="#item_1021"/>
+        <link:link rdf:resource="#item_1019"/>
+        <dc:title>CheckM: assessing the quality of microbial genomes recovered from isolates, single cells, and metagenomes</dc:title>
+        <dcterms:abstract>Large-scale recovery of genomes from isolates, single cells, and metagenomic data has been made possible by advances in computational methods and substantial reductions in sequencing costs. Although this increasing breadth of draft genomes is providing key information regarding the evolutionary and functional diversity of microbial life, it has become impractical to finish all available reference genomes. Making robust biological inferences from draft genomes requires accurate estimates of their completeness and contamination. Current methods for assessing genome quality are ad hoc and generally make use of a limited number of “marker” genes conserved across all bacterial or archaeal genomes. Here we introduce CheckM, an automated method for assessing the quality of a genome using a broader set of marker genes specific to the position of a genome within a reference genome tree and information about the collocation of these genes. We demonstrate the effectiveness of CheckM using synthetic data and a wide range of isolate-, single-cell-, and metagenome-derived genomes. CheckM is shown to provide accurate estimates of genome completeness and contamination and to outperform existing approaches. Using CheckM, we identify a diverse range of errors currently impacting publicly available isolate genomes and demonstrate that genomes obtained from single cells and metagenomic data vary substantially in quality. In order to facilitate the use of draft genomes, we propose an objective measure of genome quality that can be used to select genomes suitable for specific gene- and genome-centric analyses of microbial communities.</dcterms:abstract>
+        <dc:date>07/01/2015</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>CheckM</z:shortTitle>
+        <z:libraryCatalog>genome.cshlp.org</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://genome.cshlp.org/content/25/7/1043</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:19:07</dcterms:dateSubmitted>
+        <dc:description>Company: Cold Spring Harbor Laboratory Press
+Distributor: Cold Spring Harbor Laboratory Press
+Institution: Cold Spring Harbor Laboratory Press
+Label: Cold Spring Harbor Laboratory Press
+Publisher: Cold Spring Harbor Lab
+PMID: 25977477</dc:description>
+        <bib:pages>1043-1055</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1088-9051,%201549-5469">
+        <prism:volume>25</prism:volume>
+        <dc:title>Genome Research</dc:title>
+        <dc:identifier>DOI 10.1101/gr.186072.114</dc:identifier>
+        <prism:number>7</prism:number>
+        <dcterms:alternative>Genome Res.</dcterms:alternative>
+        <dc:identifier>ISSN 1088-9051, 1549-5469</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_1020">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text PDF</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://genome.cshlp.org/content/25/7/1043.full.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:19:10</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1021">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>PubMed entry</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>http://www.ncbi.nlm.nih.gov/pubmed/25977477</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:19:10</dcterms:dateSubmitted>
+        <z:linkMode>3</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1019">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://genome.cshlp.org/content/25/7/1043</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-08 18:19:15</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <bib:Report rdf:about="http://biorxiv.org/lookup/doi/10.1101/2022.01.23.477364">
+        <z:itemType>report</z:itemType>
+        <dc:publisher>
+           <foaf:Organization><foaf:name>Ecology</foaf:name></foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Bos</foaf:surname>
+                        <foaf:givenName>Ryan P.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kaul</foaf:surname>
+                        <foaf:givenName>Drishti</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zettler</foaf:surname>
+                        <foaf:givenName>Erik R.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Hoffman</foaf:surname>
+                        <foaf:givenName>Jeffrey M.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dupont</foaf:surname>
+                        <foaf:givenName>Christopher L.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Amaral-Zettler</foaf:surname>
+                        <foaf:givenName>Linda A.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Mincer</foaf:surname>
+                        <foaf:givenName>Tracy J.</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_1034"/>
+        <dc:title>Tracking Genomic Characteristics across Oceanic Provinces: Contrasting Early and Mature Plastic Biofilm Communities</dc:title>
+        <dcterms:abstract>While plastic has become omnipresent in the marine environment, knowledge of how plastic biofilm communities develop from functional metabolic and phylogenetic perspectives is nascent, although these data are central to understanding microbial ecology surrounding plastic substrates in the ocean. By incubating virgin microplastics during oceanic transects and comparing with naturally occurring plastic litter at the same locations, we constructed functional gene catalogs to contrast the metabolic differences between early and mature biofilm communities. Early colonization incubations were consistently dominated by Alteromonadaceae and harbored significantly higher proportions of genes associated with adhesion, biofilm formation, chemotaxis, defense, iron acquisition and utilization, and motility. Comparative genomic analyses with Alteromonas, Marinobacter, and Marisediminitalea metagenome assembled genomes (MAGs) spotlighted the importance of the mannose-sensitive hemagglutinin operon, adhesive genes genetically transposed from intestinal pathogens, for early colonization of hydrophobic plastic surfaces. Synteny alignments of the former operon also demonstrated apparent positive selection for mshA alleles across all MAGs. Early colonizers varied little in terms of large-scale genomic characteristics, despite the presence of latitudinal, salinity, and temperature gradients. Mature plastic biofilms, composed of predominantly Rhodobacteraceae followed by Flavobacteriaceae, that are critically important for carbon turnover in oceanic ecosystems, displayed significantly higher proportions of genes involved in oxidative phosphorylation, phosphonate metabolism, photosynthesis, secondary metabolism, and Type IV secretion. Our metagenomic analyses provide insight into early biofilm formation on virgin surfaces in the marine environment, as well as how early colonizers self-assemble, compared to mature, taxonomically, and metabolically diverse biofilms.</dcterms:abstract>
+        <dc:date>2022-01-24</dc:date>
+        <z:language>en</z:language>
+        <z:shortTitle>Tracking Genomic Characteristics across Oceanic Provinces</z:shortTitle>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://biorxiv.org/lookup/doi/10.1101/2022.01.23.477364</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-04 16:18:56</dcterms:dateSubmitted>
+        <dc:description>DOI: 10.1101/2022.01.23.477364</dc:description>
+        <z:type>preprint</z:type>
+    </bib:Report>
+    <z:Attachment rdf:about="#item_1034">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Bos et al. - 2022 - Tracking Genomic Characteristics across Oceanic Pr.pdf</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.biorxiv.org/content/10.1101/2022.01.23.477364v1.full.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-10-04 16:18:54</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Document rdf:about="https://journals.asm.org/doi/epub/10.1128/mSphere.00971-19">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <link:link rdf:resource="#item_1121"/>
+        <link:link rdf:resource="#item_1120"/>
+        <dc:title>To Dereplicate or Not To Dereplicate?</dc:title>
+        <z:language>en</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.asm.org/doi/epub/10.1128/mSphere.00971-19</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-09-29 14:59:33</dcterms:dateSubmitted>
+        <dc:description>DOI: 10.1128/mSphere.00971-19</dc:description>
+    </bib:Document>
+    <z:Attachment rdf:about="#item_1121">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Full Text</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7380574/pdf/mSphere.00971-19.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-09-29 14:59:38</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <z:Attachment rdf:about="#item_1120">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>Snapshot</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://journals.asm.org/doi/epub/10.1128/mSphere.00971-19</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2022-09-29 14:59:38</dcterms:dateSubmitted>
+        <z:linkMode>1</z:linkMode>
+        <link:type>text/html</link:type>
+    </z:Attachment>
+    <z:Collection rdf:about="#collection_41">
+        <dc:title>Advances</dc:title>
+        <dcterms:hasPart rdf:resource="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01216-5"/>
+        <dcterms:hasPart rdf:resource="http://journal.frontiersin.org/article/10.3389/fmicb.2017.02594/full"/>
+        <dcterms:hasPart rdf:resource="https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000294"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_40">
+        <dc:title>Disc4:Archaea</dc:title>
+        <dcterms:hasPart rdf:resource="https://www.nature.com/articles/s41586-021-03494-3"/>
+        <dcterms:hasPart rdf:resource="http://www.nature.com/articles/s41467-019-09364-x"/>
+        <dcterms:hasPart rdf:resource="http://www.nature.com/articles/nature14447"/>
+        <dcterms:hasPart rdf:resource="#item_255"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_39">
+        <dc:title>Disc5:SAG</dc:title>
+        <dcterms:hasPart rdf:resource="http://www.nature.com/articles/s41579-020-0323-1"/>
+        <dcterms:hasPart rdf:resource="http://www.nature.com/articles/s41467-019-10542-0"/>
+        <dcterms:hasPart rdf:resource="https://onlinelibrary.wiley.com/doi/10.1111/1751-7915.12420"/>
+    </z:Collection>
+</rdf:RDF>
