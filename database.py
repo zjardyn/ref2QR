@@ -83,4 +83,34 @@ def delete_all_references():
     count = ReferenceList.query.count()
     ReferenceList.query.delete()
     db.session.commit()
-    return count 
+    return count
+
+def get_database_stats():
+    """Return statistics about the reference lists in the database."""
+    now = datetime.datetime.utcnow()
+    total_count = ReferenceList.query.count()
+    active_count = ReferenceList.query.filter(
+        (ReferenceList.expires_at.is_(None)) | (ReferenceList.expires_at > now)
+    ).count()
+    expired_count = ReferenceList.query.filter(
+        ReferenceList.expires_at.isnot(None),
+        ReferenceList.expires_at <= now
+    ).count()
+    newest = ReferenceList.query.order_by(
+        ReferenceList.created_at.desc()
+    ).limit(5).all()
+    newest_info = []
+    for ref in newest:
+        entries = json.loads(ref.entries)
+        newest_info.append({
+            'id': ref.id,
+            'created_at': ref.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'expires_at': ref.expires_at.strftime('%Y-%m-%d %H:%M:%S') if ref.expires_at else 'Never',
+            'entries_count': len(entries)
+        })
+    return {
+        'total_count': total_count,
+        'active_count': active_count,
+        'expired_count': expired_count,
+        'newest_info': newest_info
+    } 

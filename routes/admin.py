@@ -13,8 +13,7 @@ def cleanup_expired_references():
         abort(403)
         
     # Clean up references older than 30 days
-    cutoff_date = datetime.datetime.now() - datetime.timedelta(days=30)
-    database.cleanup_expired_references(cutoff_date)
+    database.delete_expired_references()
     
     return "Cleanup completed successfully"
 
@@ -40,15 +39,11 @@ def confirm_delete_all():
 @admin_bp.route('/admin/delete-all/confirm', methods=['POST'])
 def delete_all_references():
     """Delete all references from the database."""
-    # Check for maintenance key
-    if request.form.get('key') != MAINTENANCE_KEY:
+    # Accept key from form or query string
+    key = request.form.get('key') or request.args.get('key')
+    if key != MAINTENANCE_KEY:
         abort(403)
-        
-    # Check for confirmation
     if request.form.get('confirm') != 'yes':
         return redirect(url_for('admin.confirm_delete_all', key=MAINTENANCE_KEY))
-        
-    # Delete all references
     database.delete_all_references()
-    
     return "All references have been deleted" 

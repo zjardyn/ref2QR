@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Database Statistics</h1>
+<ul>
+  <li>Total Reference Lists: {{ stats.total_count }}</li>
+  <li>Active Reference Lists: {{ stats.active_count }}</li>
+  <li>Expired Reference Lists: {{ stats.expired_count }}</li>
+</ul>
+<h2>Newest Reference Lists</h2>
+<ul>
+  {% for ref in stats.newest_info %}
+    <li>ID: {{ ref.id }}, Created: {{ ref.created_at }}, Expires: {{ ref.expires_at }}, Entries: {{ ref.entries_count }}</li>
+  {% endfor %}
+</ul>
+{% endblock %} 

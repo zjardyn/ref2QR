@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Confirm Delete All References</h1>
+<form method="post" action="{{ url_for('admin.delete_all_references') }}">
+  <input type="hidden" name="key" value="{{ request.args.get('key', '') }}">
+  <input type="hidden" name="confirm" value="yes">
+  <button type="submit">Yes, delete all references</button>
+</form>
+{% endblock %} 
