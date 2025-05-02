@@ -243,6 +243,9 @@ def show_references(ref_id):
         html_report += "</div>\n"
     html_report += """
     </div>
+    <div style=\"margin-top: 30px; text-align: center;\">
+        <a href=\"/\" class=\"btn btn-primary\">Back to Home</a>
+    </div>
 </body>
 </html>"""
     return html_report

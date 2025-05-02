@@ -105,20 +105,7 @@
         
         <div class="forms-container">
             <div class="option-section">
-                <h2 class="option-title">Option 1: Upload Reference File</h2>
-                <p>Upload a .bib, .rdf, .ris, or .xml file to generate a QR code linking to its HTML reference list.</p>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="file" name="file" accept=".bib,.rdf,.ris,.xml">
-                    </div>
-                    <input type="submit" value="Upload & Generate QR">
-                </form>
-            </div>
-            
-            <div class="or-divider">OR</div>
-            
-            <div class="option-section">
-                <h2 class="option-title">Option 2: Link to Google Doc</h2>
+                <h2 class="option-title">Option 1: Link to Google Doc</h2>
                 <p>Enter the URL of your Google Doc.</p>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
@@ -126,6 +113,19 @@
                         <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." required>
                     </div>
                     <input type="submit" value="Generate QR">
+                </form>
+            </div>
+            
+            <div class="or-divider">OR</div>
+            
+            <div class="option-section">
+                <h2 class="option-title">Option 2: Upload Reference File</h2>
+                <p>Upload a .bib, .rdf, .ris, or .xml file to generate a QR code linking to its HTML reference list.</p>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file" accept=".bib,.rdf,.ris,.xml">
+                    </div>
+                    <input type="submit" value="Upload & Generate QR">
                 </form>
             </div>
         </div>
