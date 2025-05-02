@@ -109,7 +109,7 @@
                 <p>Enter the URL of your Google Doc.</p>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="gdoc_url">URL:</label>
+                        <!-- Removed label for cleaner look -->
                         <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." required>
                     </div>
                     <input type="submit" value="Generate QR">
@@ -120,12 +120,22 @@
             
             <div class="option-section">
                 <h2 class="option-title">Option 2: Upload Reference File</h2>
-                <p>Upload a .bib, .rdf, .ris, or .xml file to generate a QR code linking to its HTML reference list.</p>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="form-group">
+                <p>Upload a reference file from your computer (like .bib, .rdf, .ris, or .xml) and get a QR code that links to a readable list of your references.</p>
+                <form method="post" enctype="multipart/form-data" style="display: flex; align-items: center; gap: 32px; flex-wrap: nowrap;">
+                    <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
                         <input type="file" name="file" accept=".bib,.rdf,.ris,.xml">
                     </div>
-                    <input type="submit" value="Upload & Generate QR">
+                    <input type="submit" value="Upload & Generate QR" style="min-width: 180px;">
+                    <div class="photos-row" style="display: flex; flex-direction: row; align-items: center; gap: 16px; margin-left: 8px;">
+                        {% set photo_files = [
+                            'Zotero_7_Icon.jpg',
+                            'Papirus-Team-Papirus-Apps-Mendeley-desktop.512.png',
+                            'endnote_macos_bigsur_icon_190201.webp',
+                        ] %}
+                        {% for filename in photo_files %}
+                            <img src="{{ url_for('static', filename='photos/' ~ filename) }}" alt="{{ filename.split('.')[0] }}" style="max-height: 32px; border-radius: 6px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 3px;">
+                        {% endfor %}
+                    </div>
                 </form>
             </div>
         </div>
