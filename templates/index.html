@@ -47,7 +47,7 @@
 </head>
 <body>
     <div class="content">
-        <h1>Reference to QR Code Converter</h1>
+        <h1>QR Code Generator</h1>
         
         {% if error %}
             <p class="error">{{ error }}</p>
@@ -106,7 +106,7 @@
         <div class="forms-container">
             <div class="option-section">
                 <h2 class="option-title">Option 1: Link to Google Doc</h2>
-                <p>Enter the URL of your Google Doc.</p>
+                <p>Enter the URL of your Google Doc and get a QR code.</p>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <!-- Removed label for cleaner look -->
@@ -120,7 +120,7 @@
             
             <div class="option-section">
                 <h2 class="option-title">Option 2: Upload Reference File</h2>
-                <p>Upload a reference file from your computer (like .bib, .rdf, .ris, or .xml) and get a QR code that links to a readable list of your references.</p>
+                <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code. </p>
                 <form method="post" enctype="multipart/form-data" style="display: flex; align-items: center; gap: 32px; flex-wrap: nowrap;">
                     <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
                         <input type="file" name="file" accept=".bib,.rdf,.ris,.xml">

@@ -33,4 +33,15 @@ def test_google_doc_url():
         }
         response = client.post('/', data=data, follow_redirects=True)
         assert response.status_code == 200, "Failed to submit Google Doc URL"
-        assert b'data:image/png;base64' in response.data, "QR code not found in response for Google Doc URL" 
+        assert b'data:image/png;base64' in response.data, "QR code not found in response for Google Doc URL"
+
+def test_fmg_poster_bib():
+    """Test uploading FMG_POSTER.bib and check for QR code generation."""
+    bib_path = os.path.join(EXAMPLES_DIR, 'FMG_POSTER.bib')
+    assert os.path.exists(bib_path), "FMG_POSTER.bib does not exist in old/ directory."
+    with app.test_client() as client:
+        with open(bib_path, 'rb') as f:
+            data = {'file': (f, 'FMG_POSTER.bib')}
+            response = client.post('/', data=data, content_type='multipart/form-data', follow_redirects=True)
+            assert response.status_code == 200, "Failed to upload FMG_POSTER.bib"
+            assert b'data:image/png;base64' in response.data, "QR code not found in response for FMG_POSTER.bib" 

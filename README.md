@@ -6,43 +6,22 @@ A Flask application that converts academic reference files (BibTeX, RDF, RIS, En
 
 - Convert reference files (.bib, .rdf, .ris, .xml) to QR codes
 - Link directly to Google Docs with QR codes
-- Persistent storage of reference data
-- Automatic expiration of old references
+- Persistent storage of reference data as html files
+- Automatic expiration of old references 
+   -TODO: change the experiation to longer than 30 days
 - Admin tools for database monitoring and maintenance
-
-## Quick Start
-
-The application comes with scripts to easily run and stop the server:
-
-1. Start the application:
-   ```bash
-   ./run_app.sh
-   ```
-
-2. Access the application at http://localhost:5000 in your browser
-
-3. Stop the application (if needed):
-   ```bash
-   ./stop_app.sh
-   ```
 
 ## Google Docs Integration
 
-The application now supports creating QR codes that link directly to Google Documents:
+First, the application supports creating QR codes that link directly to Google Documents:
 
-1. Choose "Option 2: Link to Google Document" on the main page
-2. Enter an optional title for the document
-3. Paste the Google Docs URL
-4. Generate a QR code that will redirect users directly to your document
+1. Choose "Option 1: Link to Google Document" on the main page
+1. Paste the Google Docs URL
+3. Generate a QR code that will redirect users directly to your document
 
-This is useful for:
-- Sharing reference lists maintained in Google Docs
-- Linking to collaborative documents
-- Providing access to formatted references that don't fit the standard formats
+## Database Features
 
-## New Database Feature
-
-The application uses SQLAlchemy to store references in a persistent database instead of in-memory storage. This means:
+The dev application uses SQLAlchemy to store references in a persistent database instead of in-memory storage. This means:
 
 - Reference lists persist across server restarts
 - References can have expiration dates (default: 30 days)
@@ -85,7 +64,7 @@ Set up a cron job or scheduled task to call this endpoint regularly (e.g., daily
 0 2 * * * curl https://your-domain.com/maintenance/cleanup?key=your_maintenance_key
 ```
 
-#### Delete All References
+#### Delete All References 
 
 If you need to completely reset the database and remove all reference lists:
 
@@ -111,6 +90,33 @@ This shows:
 - Option to clean up expired references
 
 The maintenance key is set in `app.py` and should be changed to a secure value in production.
+
+
+
+Th app has limit
+
+## Test Capabilities
+
+Automated tests are provided to verify the core functionality of the application:
+
+- **File Upload Tests**: The test suite uploads example reference files (`.bib`, `.rdf`, `.ris`, `.xml`) from the `old/` directory and checks that the application processes them correctly and generates a QR code for each.
+- **Google Docs URL Test**: The test suite submits a Google Docs URL and verifies that a QR code is generated for the link.
+
+Tests are located in `tests/test_uploads.py` and use `pytest` as the test runner.
+
+### Running the Tests
+
+1. Ensure you have the required dependencies installed (see below).
+2. Run the tests from the project root with:
+   ```bash
+   pytest
+   ```
+
+# TODO:
+
+1. The `Upload & Generate QR` button should check for email and sms verification.
+2. We want to store the user info in the database, and also what type of file was uploaded (.bib, .rdf, .xml, or .ris)
+
 
 ## Installation and Setup
 
