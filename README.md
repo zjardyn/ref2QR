@@ -113,7 +113,8 @@ Tests are located in `tests/test_uploads.py` and use `pytest` as the test runner
 1. The `Upload & Generate QR` button should check for email and sms verification.
 2. We want to store the user info in the database, and also what type of file was uploaded (.bib, .rdf, .xml, or .ris)
 3. We want to give user 15 requests an hour to avoid mal traffic.
-4. 
+4. After the app is robust we should delete the functionality for removing all references.
+5. The app should be production ready. Switch the database over to PostgreSQL. 
 
 ## Installation and Setup
 
