@@ -72,7 +72,7 @@ If you need to completely reset the database and remove all reference lists:
 http://localhost:5000/admin/delete-all?key=change_this_key_for_production
 ```
 
-**Warning**: This will permanently delete all references from the database. A confirmation page will be shown before deletion.
+**Warning**: This will permanently delete all references from the database. A confirmation page will be shown before deletion. Only use this as a last resort (or delete this functionality entirely). 
 
 #### Database Statistics
 
@@ -91,13 +91,9 @@ This shows:
 
 The maintenance key is set in `app.py` and should be changed to a secure value in production.
 
-
-
-Th app has limit
-
 ## Test Capabilities
 
-Automated tests are provided to verify the core functionality of the application:
+Automated tests are provided to test the parsing of the filetypes. 
 
 - **File Upload Tests**: The test suite uploads example reference files (`.bib`, `.rdf`, `.ris`, `.xml`) from the `old/` directory and checks that the application processes them correctly and generates a QR code for each.
 - **Google Docs URL Test**: The test suite submits a Google Docs URL and verifies that a QR code is generated for the link.
@@ -116,7 +112,8 @@ Tests are located in `tests/test_uploads.py` and use `pytest` as the test runner
 
 1. The `Upload & Generate QR` button should check for email and sms verification.
 2. We want to store the user info in the database, and also what type of file was uploaded (.bib, .rdf, .xml, or .ris)
-
+3. We want to give user 15 requests an hour to avoid mal traffic.
+4. 
 
 ## Installation and Setup
 
