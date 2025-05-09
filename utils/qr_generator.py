@@ -33,4 +33,4 @@ def generate_qr_data_url(data_url: str) -> str:
     buffer = io.BytesIO()
     img.save(buffer, format='PNG')
     img_str = base64.b64encode(buffer.getvalue()).decode('utf-8')
-    return f"data:image/png;base64,{img_str}" 
+    return f"data:image/png;base64,{img_str}"

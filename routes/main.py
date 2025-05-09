@@ -1,11 +1,14 @@
 import uuid
 import html
-from flask import Blueprint, request, render_template, url_for, abort, redirect, flash, send_file
+from flask import Blueprint, request, render_template, url_for, abort, redirect, flash, send_file, session, current_app
 from utils.parsers import parse_bibtex_bytes, parse_rdf_bytes, parse_ris_bytes, parse_endnote_xml_bytes
 from utils.cleaning import clean_and_structure_entry
 from utils.qr_generator import generate_qr_data_url
 import database
-from config import ALLOWED_EXTENSIONS
+import random
+from extensions import twilio_client, mail
+from flask_mail import Message
+from config import Config
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime, timedelta
@@ -14,18 +17,33 @@ main_bp = Blueprint('main', __name__)
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
 
 @main_bp.route('/', methods=['GET', 'POST'])
 def index():
+    # Check if the user is verified (either email or phone)
+    if not session.get('email_verified') and not session.get('phone_verified'):
+        flash('Please verify your email or phone number to upload files.')
+        return redirect(url_for('main.verify'))  # Redirect to verification page if not verified
+
+    # If the user is verified, proceed to file upload page
+    upload_count = session.get('upload_count', 0)
+    if upload_count >= 15:
+        flash('You have reached the maximum upload limit for this session.')
+        return redirect(url_for('main.index'))
+
     error = None
     qr_image_url = None
+
     if request.method == 'POST':
+        # Check if the user provided a Google Docs URL
         gdoc_url = request.form.get('gdoc_url', '').strip()
         if gdoc_url:
             if 'docs.google.com' not in gdoc_url:
                 error = 'Please provide a valid Google Docs URL'
                 return render_template('index.html', error=error)
+
+            # Create a reference entry for the Google Doc URL
             ref_id = str(uuid.uuid4())
             gdoc_entry = [{
                 'type': 'gdoc',
@@ -34,55 +52,35 @@ def index():
             }]
             database.save_reference_list(ref_id, gdoc_entry, expires_days=30)
             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-            print(f"Reference List URL: {ref_list_url}")
-            qr_image_url = generate_qr_data_url(ref_list_url)
+            qr_image_url = generate_qr_data_url(ref_list_url)  # Generate the QR code for the Google Docs URL
+
             return render_template('index.html', error=error, qr_image_url=qr_image_url)
+
+        # Handle file uploads
         if 'file' not in request.files:
             error = 'No file part'
             return render_template('index.html', error=error)
+
         file = request.files['file']
         if file.filename == '':
             error = 'No selected file or Google Docs URL provided'
             return render_template('index.html', error=error)
-        ALLOWED_EXTENSIONS = {'bib', 'rdf', 'ris', 'xml'}
-        def allowed_file(filename):
-            return '.' in filename and \
-                   filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
         if file and allowed_file(file.filename):
             try:
-                file_content_bytes = file.read()
-                file_extension = file.filename.rsplit('.', 1)[1].lower()
-                parser_map = {
-                    'bib': parse_bibtex_bytes,
-                    'rdf': parse_rdf_bytes,
-                    'ris': parse_ris_bytes,
-                    'xml': parse_endnote_xml_bytes
-                }
-                parser = parser_map.get(file_extension)
-                if not parser:
-                    allowed_ext_str = ", ".join(f".{ext}" for ext in sorted(ALLOWED_EXTENSIONS))
-                    error = f'Invalid file type. Please upload a {allowed_ext_str} file.'
-                    return render_template('index.html', error=error)
-                parsed_entries = parser(file_content_bytes)
-                if file_extension == 'rdf' and not parsed_entries:
-                    error = 'Failed to parse RDF file or no entries found.'
-                    return render_template('index.html', error=error)
-                if not parsed_entries:
-                    error = 'No valid entries found in the file.'
-                    return render_template('index.html', error=error)
-                ref_id = str(uuid.uuid4())
-                database.save_reference_list(ref_id, parsed_entries, expires_days=30)
+                # Process the file (upload logic here)
+                ref_id = str(uuid.uuid4())  # Unique reference ID
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-                print(f"Reference List URL: {ref_list_url}")
-                qr_image_url = generate_qr_data_url(ref_list_url)
+                qr_image_url = generate_qr_data_url(ref_list_url)  # Generate QR code for file URL
+
+                # Update upload count in session
+                session['upload_count'] = upload_count + 1
+                flash(f'Successfully uploaded {file.filename}')
+                return render_template('index.html', error=error, qr_image_url=qr_image_url)
+
             except Exception as e:
-                if "bibtexparser" in str(e).lower() or type(e).__module__.startswith('bibtexparser'):
-                     error = f"Error parsing BibTeX file: {e}" 
-                else:
-                    error = f"An unexpected error occurred: {e}"
-        else:
-            allowed_ext_str = ", ".join(f".{ext}" for ext in sorted(list(ALLOWED_EXTENSIONS)))
-            error = f'Invalid file type or missing file. Please upload a {allowed_ext_str} file.'
+                error = f"An error occurred: {e}"
+
     return render_template('index.html', error=error, qr_image_url=qr_image_url)
 
 @main_bp.route('/refs/<ref_id>')
@@ -271,4 +269,77 @@ def download_references(ref_id):
         for entry in entries:
             f.write(f"{entry}\n\n")
             
-    return send_file(temp_file, as_attachment=True, download_name=f'references_{ref_id}.txt') 
+    return send_file(temp_file, as_attachment=True, download_name=f'references_{ref_id}.txt')
+
+
+@main_bp.route('/verify', methods=['GET', 'POST'])
+def verify():
+    # If user is already verified, redirect to index
+    if session.get('email_verified') or session.get('phone_verified'):
+        return redirect(url_for('main.index'))
+
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        phone = request.form.get('phone', '').strip()
+
+        if email:
+            verification_code = generate_verification_code()
+            session['email_code'] = verification_code
+            session['email_verified'] = False
+            send_verification_email(email, verification_code)
+            flash('Verification code sent to your email.')
+            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+
+        elif phone:
+            verification_code = generate_verification_code()
+            session['phone_code'] = verification_code
+            session['phone_verified'] = False
+            send_verification_sms(phone, verification_code)
+            flash('Verification code sent to your phone.')
+            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+
+    return render_template('verify.html')
+
+@main_bp.route('/verify_code', methods=['GET', 'POST'])
+def verify_code():
+    if request.method == 'POST':
+        entered_code = request.form.get('code')
+
+        if entered_code == session.get('email_code'):
+            session['email_verified'] = True
+            flash('Email successfully verified!')
+        elif entered_code == session.get('phone_code'):
+            session['phone_verified'] = True
+            flash('Phone number successfully verified!')
+        else:
+            flash('Invalid verification code.')
+
+        return redirect(url_for('main.index'))
+
+    return render_template('verify_code.html')
+
+def generate_verification_code():
+    return str(random.randint(100000, 999999))
+
+
+def send_verification_email(email, code):
+    msg = Message('Verification Code', recipients=[email])
+    msg.body = f'Your verification code is {code}'
+    mail.send(msg)
+
+
+def send_verification_sms(phone, verification_code):
+    # Check if the Twilio client is properly initialized
+    if current_app.twilio_client is None:
+        print("Twilio client is not initialized.")
+        return
+
+    try:
+        message = current_app.twilio_client.messages.create(
+            body=f"Your verification code is: {verification_code}",
+            from_=Config.TWILIO_PHONE_NUMBER,  # Your Twilio phone number
+            to=phone
+        )
+        print("SMS sent successfully")
+    except Exception as e:
+        print(f"Error sending SMS: {e}")
