@@ -19,24 +19,32 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
 
+
 @main_bp.route('/', methods=['GET', 'POST'])
 def index():
-    # Check if the user is verified (either email or phone)
-    if not session.get('email_verified') and not session.get('phone_verified'):
-        flash('Please verify your email or phone number to upload files.')
-        return redirect(url_for('main.verify'))  # Redirect to verification page if not verified
+    # Set a limit for the number of QR codes a user can generate in a session
+    MAX_QR_CODES_PER_SESSION = 15
 
-    # If the user is verified, proceed to file upload page
-    upload_count = session.get('upload_count', 0)
-    if upload_count >= 15:
-        flash('You have reached the maximum upload limit for this session.')
-        return redirect(url_for('main.index'))
+    # Get the current count of generated QR codes in this session
+    generated_qr_codes = session.get('generated_qr_codes', 0)
+
+    # Check if the user has exceeded the limit
+    if generated_qr_codes >= MAX_QR_CODES_PER_SESSION:
+        flash(f'You have reached the maximum limit of {MAX_QR_CODES_PER_SESSION} QR codes for this session.')
+        session.clear()  # Clear the session (ends the session)
+        return redirect(url_for('main.index'))  # Redirect to the index page with a message
 
     error = None
     qr_image_url = None
 
     if request.method == 'POST':
-        # Check if the user provided a Google Docs URL
+        # Check if the user clicked on either of the QR code generation options
+        # If the user is not verified, redirect to the verification page
+        if not session.get('email_verified') and not session.get('phone_verified'):
+            flash('Please verify your email or phone number to upload files.')
+            return redirect(url_for('main.verify'))  # Redirect to verification page if not verified
+
+        # Google Docs URL generation
         gdoc_url = request.form.get('gdoc_url', '').strip()
         if gdoc_url:
             if 'docs.google.com' not in gdoc_url:
@@ -53,6 +61,9 @@ def index():
             database.save_reference_list(ref_id, gdoc_entry, expires_days=30)
             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
             qr_image_url = generate_qr_data_url(ref_list_url)  # Generate the QR code for the Google Docs URL
+
+            # Increment the QR code count in the session
+            session['generated_qr_codes'] = generated_qr_codes + 1
 
             return render_template('index.html', error=error, qr_image_url=qr_image_url)
 
@@ -73,8 +84,11 @@ def index():
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
                 qr_image_url = generate_qr_data_url(ref_list_url)  # Generate QR code for file URL
 
+                # Increment the QR code count in the session
+                session['generated_qr_codes'] = generated_qr_codes + 1
+
                 # Update upload count in session
-                session['upload_count'] = upload_count + 1
+                session['upload_count'] = session.get('upload_count', 0) + 1
                 flash(f'Successfully uploaded {file.filename}')
                 return render_template('index.html', error=error, qr_image_url=qr_image_url)
 
@@ -82,6 +96,7 @@ def index():
                 error = f"An error occurred: {e}"
 
     return render_template('index.html', error=error, qr_image_url=qr_image_url)
+
 
 @main_bp.route('/refs/<ref_id>')
 def show_references(ref_id):
