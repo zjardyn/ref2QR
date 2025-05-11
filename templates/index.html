@@ -48,11 +48,11 @@
 <body>
     <div class="content">
         <h1>QR Code Generator</h1>
-        
+
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
-        
+
         {% if qr_image_url %}
         <div class="qr-code">
             <h2>Generated QR Code</h2>
@@ -66,27 +66,27 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const downloadBtn = document.getElementById('download-qr');
                 const qrImage = document.getElementById('qr-image');
-                
+
                 downloadBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+
                     // Create a canvas element
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
-                    
+
                     // Wait for image to load
                     const img = new Image();
                     img.onload = function() {
                         // Set canvas size to match image
                         canvas.width = img.width;
                         canvas.height = img.height;
-                        
+
                         // Draw image on canvas
                         context.drawImage(img, 0, 0);
-                        
+
                         // Convert to data URL and trigger download
                         const dataURL = canvas.toDataURL('image/png');
-                        
+
                         // Create temporary download link
                         const downloadLink = document.createElement('a');
                         downloadLink.href = dataURL;
@@ -95,14 +95,14 @@
                         downloadLink.click();
                         document.body.removeChild(downloadLink);
                     };
-                    
+
                     // Set image source from the displayed QR code
                     img.src = qrImage.src;
                 });
             });
         </script>
         {% endif %}
-        
+
         <div class="forms-container">
             <div class="option-section">
                 <h2 class="option-title">Option 1: Link to Google Doc</h2>
@@ -115,9 +115,9 @@
                     <input type="submit" value="Generate QR">
                 </form>
             </div>
-            
+
             <div class="or-divider">OR</div>
-            
+
             <div class="option-section">
                 <h2 class="option-title">Option 2: Upload Reference File</h2>
                 <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code. </p>
@@ -141,4 +141,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>

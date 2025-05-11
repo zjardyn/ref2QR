@@ -42,10 +42,6 @@ conda-env/
 # Logs
 *.log
 
-# Local development
-.env
-.env.local
-.env.*.local
 
 # OS specific
 .DS_Store
