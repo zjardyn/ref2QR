@@ -43,7 +43,7 @@
         <p>Enter the URL of your Google Doc and get a QR code.</p>
         <form id="gdoc-form" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." pattern="https://docs\\.google\\.com/.*" required>
+            <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." pattern="https://docs\.google\.com/document/d/[a-zA-Z0-9_-]+(/edit)?(/.*)?" required>
           </div>
           <input type="submit" value="Generate QR">
         </form>
@@ -67,7 +67,7 @@
                      name="file"
                      accept=".bib,.rdf,.ris,.xml"
                      {% if not pending_filename %} required {% endif %}>
-              {# only emit this when there’s a pending upload #}
+              {# only emit this when there's a pending upload #}
               {% if pending_filename %}
                 <input type="hidden"
                        name="pending_file_id"
