@@ -36,6 +36,7 @@
     {% endif %}
 
     <div class="forms-container">
+
       <!-- Google‑Doc form -->
       <div class="option-section">
         <h2 class="option-title">Option 1: Link to Google Doc</h2>
@@ -50,23 +51,40 @@
 
       <div class="or-divider">OR</div>
 
-      <!-- File upload form -->
-      <div class="option-section">
-        <h2 class="option-title">Option 2: Upload Reference File</h2>
-        <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code.</p>
-        <form id="file-form" method="post" enctype="multipart/form-data" style="display:flex;align-items:center;gap:32px;flex-wrap:nowrap">
-          <div class="form-group" style="margin:0;min-width:180px">
-            <input type="file" id="file-input" name="file" accept=".bib,.rdf,.ris,.xml" required>
-          </div>
-          <input type="submit" value="Upload & Generate QR" style="min-width:180px">
-          <div class="photos-row" style="display:flex;align-items:center;gap:16px;margin-left:8px">
-            {% set photo_files=['Zotero_7_Icon.jpg','Papirus-Team-Papirus-Apps-Mendeley-desktop.512.png','endnote_macos_bigsur_icon_190201.webp'] %}
-            {% for fn in photo_files %}
-            <img src="{{ url_for('static', filename='photos/' ~ fn) }}" alt="{{ fn.split('.')[0] }}" style="max-height:32px;border-radius:6px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:3px">
-            {% endfor %}
-          </div>
-        </form>
-      </div>
+      <!-- File upload form (Option 2) -->
+        <div class="option-section">
+          <h2 class="option-title">Option 2: Upload Reference File</h2>
+          <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code.</p>
+
+          <form id="file-form"
+                method="post"
+                enctype="multipart/form-data"
+                style="display:flex;align-items:center;gap:32px;flex-wrap:nowrap">
+
+            <div class="form-group" style="margin:0;min-width:180px">
+              <input type="file"
+                     id="file-input"
+                     name="file"
+                     accept=".bib,.rdf,.ris,.xml"
+                     {% if not pending_filename %} required {% endif %}>
+              {# only emit this when there’s a pending upload #}
+              {% if pending_filename %}
+                <input type="hidden"
+                       name="pending_file_id"
+                       value="{{ pending_file_id }}">
+              {% endif %}
+            </div>
+
+            <input type="submit"
+                   value="Upload & Generate QR"
+                   style="min-width:180px">
+
+            <div class="photos-row"
+                 style="display:flex;align-items:center;gap:16px;margin-left:8px">
+              {# … your photo icons … #}
+            </div>
+          </form>
+        </div>
     </div>
   </div>
 
@@ -87,6 +105,19 @@
           tmp.src=img.src;
         });
       }
+    });
+        document.addEventListener('DOMContentLoaded', () => {
+      {% if pending_filename %}
+        const fi = document.getElementById('file-input');
+        // build a dummy File just so the UI shows the filename
+        const dt = new DataTransfer();
+        const f = new File([""], "{{ pending_filename }}");
+        dt.items.add(f);
+        fi.files = dt.files;
+
+        // optional: prevent them from picking a different file
+        // fi.disabled = true;
+      {% endif %}
     });
   </script>
 </body>
