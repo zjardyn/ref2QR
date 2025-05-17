@@ -100,7 +100,7 @@
 <body>
     <div class="content">
         <div class="nav-links">
-            {% if current_user.is_authenticated %}
+            {% if current_user is defined and current_user.is_authenticated %}
                 <span>Welcome, {{ current_user.email }}</span>
                 <a href="{{ url_for('auth.logout') }}">Logout</a>
             {% else %}

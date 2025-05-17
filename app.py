@@ -4,6 +4,8 @@ import os
 from extensions import init_app, init_twilio
 from database import db
 from routes.main import main_bp
+from routes.admin import admin_bp
+from routes.auth import auth_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)  # Load the config values
@@ -21,6 +23,8 @@ with app.app_context():
 
 # Register blueprints
 app.register_blueprint(main_bp)
+app.register_blueprint(admin_bp)
+app.register_blueprint(auth_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
