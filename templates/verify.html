@@ -94,11 +94,12 @@
 
         {% if not session.get('email_verified') and not session.get('phone_verified') %}
             <form method="post" action="{{ url_for('main.verify') }}">
-                <label for="email">Enter your email to receive a verification code:</label>
+                <label for="email">Enter your email to receive the code(check spam):</label>
                 <input type="email" name="email" placeholder="Your email address" required>
                 <button type="submit">Send Code</button>
             </form>
 
+            <!--
             <div class="divider">OR</div>
 
             <form method="post" action="{{ url_for('main.verify') }}">
@@ -106,6 +107,7 @@
                 <input type="text" name="phone" placeholder="Your phone number" required>
                 <button type="submit">Send Code</button>
             </form>
+            -->
         {% else %}
             <div class="already-verified">
                 <h2>You are already verified!</h2>

@@ -1,144 +1,93 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ref2QR</title>
-    <style>
-        body { 
-            font-family: sans-serif; 
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .content {
-            max-width: 800px;
-            margin: 2em auto; 
-            background-color: white;
-            padding: 2em;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        .error { color: red; margin: 1em 0; }
-        .qr-code { margin: 2em 0; text-align: center; padding: 2em; background-color: #f9f9f9; border-radius: 8px; }
-        .option-section { margin: 2em 0; padding: 1.5em; border: 1px solid #ddd; border-radius: 8px; }
-        .option-title { margin-top: 0; color: #2c3e50; }
-        .form-group { margin-bottom: 1em; }
-        label { display: block; margin-bottom: 0.5em; font-weight: bold; }
-        input[type="text"] { width: 100%; padding: 8px; box-sizing: border-box; }
-        input[type="submit"] { background-color: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
-        input[type="submit"]:hover { background-color: #2980b9; }
-        .or-divider { text-align: center; margin: 2em 0; font-weight: bold; color: #7f8c8d; }
-        .download-button { 
-            display: inline-block;
-            margin-top: 15px;
-            background-color: #27ae60;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .download-button:hover {
-            background-color: #219a52;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ref2QR</title>
+  <style>
+    body{font-family:sans-serif;background:#f5f5f5;margin:0;padding:0}
+    .content{max-width:800px;margin:2em auto;background:#fff;padding:2em;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.1)}
+    .error{color:#c0392b;margin:1em 0}
+    .qr-code{margin:2em 0;padding:2em;background:#f9f9f9;border-radius:8px;text-align:center}
+    .option-section{margin:2em 0;padding:1.5em;border:1px solid #ddd;border-radius:8px}
+    .option-title{margin:0;color:#2c3e50}
+    .form-group{margin-bottom:1em}
+    input[type=text]{width:100%;padding:8px;box-sizing:border-box}
+    input[type=submit]{background:#3498db;color:#fff;border:none;padding:10px 15px;border-radius:4px;cursor:pointer}
+    input[type=submit]:hover{background:#2980b9}
+    .or-divider{text-align:center;margin:2em 0;font-weight:bold;color:#7f8c8d}
+    .download-button{display:inline-block;margin-top:15px;background:#27ae60;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:bold;transition:.3s background}
+    .download-button:hover{background:#219a52}
+  </style>
 </head>
 <body>
-    <div class="content">
-        <h1>QR Code Generator</h1>
+  <div class="content">
+    <h1>QR Code Generator</h1>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
 
-        {% if qr_image_url %}
-        <div class="qr-code">
-            <h2>Generated QR Code</h2>
-            <img src="{{ qr_image_url }}" alt="QR Code" id="qr-image">
-            <p>Scan this code to access your references</p>
-            <a href="#" id="download-qr" class="download-button">Download QR Code</a>
-        </div>
-
-        <script>
-            // Set up download functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                const downloadBtn = document.getElementById('download-qr');
-                const qrImage = document.getElementById('qr-image');
-
-                downloadBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    // Create a canvas element
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-
-                    // Wait for image to load
-                    const img = new Image();
-                    img.onload = function() {
-                        // Set canvas size to match image
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-
-                        // Draw image on canvas
-                        context.drawImage(img, 0, 0);
-
-                        // Convert to data URL and trigger download
-                        const dataURL = canvas.toDataURL('image/png');
-
-                        // Create temporary download link
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = dataURL;
-                        downloadLink.download = 'reference-qr-code.png';
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-                    };
-
-                    // Set image source from the displayed QR code
-                    img.src = qrImage.src;
-                });
-            });
-        </script>
-        {% endif %}
-
-        <div class="forms-container">
-            <div class="option-section">
-                <h2 class="option-title">Option 1: Link to Google Doc</h2>
-                <p>Enter the URL of your Google Doc and get a QR code.</p>
-                <form method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <!-- Removed label for cleaner look -->
-                        <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." required>
-                    </div>
-                    <input type="submit" value="Generate QR">
-                </form>
-            </div>
-
-            <div class="or-divider">OR</div>
-
-            <div class="option-section">
-                <h2 class="option-title">Option 2: Upload Reference File</h2>
-                <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code. </p>
-                <form method="post" enctype="multipart/form-data" style="display: flex; align-items: center; gap: 32px; flex-wrap: nowrap;">
-                    <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
-                        <input type="file" name="file" accept=".bib,.rdf,.ris,.xml">
-                    </div>
-                    <input type="submit" value="Upload & Generate QR" style="min-width: 180px;">
-                    <div class="photos-row" style="display: flex; flex-direction: row; align-items: center; gap: 16px; margin-left: 8px;">
-                        {% set photo_files = [
-                            'Zotero_7_Icon.jpg',
-                            'Papirus-Team-Papirus-Apps-Mendeley-desktop.512.png',
-                            'endnote_macos_bigsur_icon_190201.webp',
-                        ] %}
-                        {% for filename in photo_files %}
-                            <img src="{{ url_for('static', filename='photos/' ~ filename) }}" alt="{{ filename.split('.')[0] }}" style="max-height: 32px; border-radius: 6px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 3px;">
-                        {% endfor %}
-                    </div>
-                </form>
-            </div>
-        </div>
+    {% if qr_image_url %}
+    <div class="qr-code">
+      <h2>Generated QR Code</h2>
+      <img src="{{ qr_image_url }}" alt="QR Code" id="qr-image">
+      <p>Scan this code to access your references</p>
+      <a href="#" id="download-qr" class="download-button">Download QR Code</a>
     </div>
+    {% endif %}
+
+    <div class="forms-container">
+      <!-- Google‑Doc form -->
+      <div class="option-section">
+        <h2 class="option-title">Option 1: Link to Google Doc</h2>
+        <p>Enter the URL of your Google Doc and get a QR code.</p>
+        <form id="gdoc-form" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." pattern="https://docs\\.google\\.com/.*" required>
+          </div>
+          <input type="submit" value="Generate QR">
+        </form>
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <!-- File upload form -->
+      <div class="option-section">
+        <h2 class="option-title">Option 2: Upload Reference File</h2>
+        <p>Upload a file (.bib, .rdf, .ris, or .xml) and get a QR code.</p>
+        <form id="file-form" method="post" enctype="multipart/form-data" style="display:flex;align-items:center;gap:32px;flex-wrap:nowrap">
+          <div class="form-group" style="margin:0;min-width:180px">
+            <input type="file" id="file-input" name="file" accept=".bib,.rdf,.ris,.xml" required>
+          </div>
+          <input type="submit" value="Upload & Generate QR" style="min-width:180px">
+          <div class="photos-row" style="display:flex;align-items:center;gap:16px;margin-left:8px">
+            {% set photo_files=['Zotero_7_Icon.jpg','Papirus-Team-Papirus-Apps-Mendeley-desktop.512.png','endnote_macos_bigsur_icon_190201.webp'] %}
+            {% for fn in photo_files %}
+            <img src="{{ url_for('static', filename='photos/' ~ fn) }}" alt="{{ fn.split('.')[0] }}" style="max-height:32px;border-radius:6px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:3px">
+            {% endfor %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared client‑side helpers -->
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{// QR download (only if present) (only if present)
+      const dl = document.getElementById('download-qr');
+      if(dl){
+        const img = document.getElementById('qr-image');
+        dl.addEventListener('click',e=>{
+          e.preventDefault();
+          const c=document.createElement('canvas');
+          const ctx=c.getContext('2d');
+          const tmp=new Image();
+          tmp.onload=()=>{c.width=tmp.width; c.height=tmp.height; ctx.drawImage(tmp,0,0);
+            const url=c.toDataURL('image/png');
+            const a=document.createElement('a');a.href=url;a.download='reference-qr-code.png';document.body.appendChild(a);a.click();a.remove();};
+          tmp.src=img.src;
+        });
+      }
+    });
+  </script>
 </body>
 </html>

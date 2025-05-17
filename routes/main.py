@@ -9,6 +9,7 @@ import random
 from extensions import twilio_client, mail
 from flask_mail import Message
 from config import Config
+from database import save_verified_email
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime, timedelta
@@ -289,7 +290,7 @@ def download_references(ref_id):
 
 @main_bp.route('/verify', methods=['GET', 'POST'])
 def verify():
-    # If user is already verified, redirect to index
+    # If user is already verified, skip straight to index
     if session.get('email_verified') or session.get('phone_verified'):
         return redirect(url_for('main.index'))
 
@@ -298,31 +299,42 @@ def verify():
         phone = request.form.get('phone', '').strip()
 
         if email:
-            verification_code = generate_verification_code()
-            session['email_code'] = verification_code
+            code = generate_verification_code()
+            session['email_code']    = code
             session['email_verified'] = False
-            send_verification_email(email, verification_code)
+            session['pending_email']  = email   # remember which addr
+
+            send_verification_email(email, code)
             flash('Verification code sent to your email.')
-            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+            return redirect(url_for('main.verify_code'))
 
         elif phone:
-            verification_code = generate_verification_code()
-            session['phone_code'] = verification_code
+            code = generate_verification_code()
+            session['phone_code']    = code
             session['phone_verified'] = False
-            send_verification_sms(phone, verification_code)
+
+            send_verification_sms(phone, code)
             flash('Verification code sent to your phone.')
-            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+            return redirect(url_for('main.verify_code'))
 
     return render_template('verify.html')
 
 @main_bp.route('/verify_code', methods=['GET', 'POST'])
 def verify_code():
     if request.method == 'POST':
-        entered_code = request.form.get('code')
+        entered_code = request.form.get('code', '').strip()
 
+        # Email code matches
         if entered_code == session.get('email_code'):
             session['email_verified'] = True
             flash('Email successfully verified!')
+
+            # Save to DB once, if not already there
+            email = session.pop('pending_email', None)
+            if email:
+                save_verified_email(email)
+
+        # Phone code matches
         elif entered_code == session.get('phone_code'):
             session['phone_verified'] = True
             flash('Phone number successfully verified!')

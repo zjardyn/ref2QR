@@ -30,7 +30,7 @@ class Config:
     TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
     TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
 
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=60)
+    PERMANENT_SESSION_LIFETIME = timedelta(seconds=30)
 
     # Secret key for sessions
     SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')

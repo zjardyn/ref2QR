@@ -70,7 +70,7 @@
         {% endif %}
 
         <form method="POST" action="{{ url_for('main.verify_code') }}">
-            <label for="code">Enter the verification code sent to your phone/email (please check spam):</label>
+            <label for="code">Enter the verification code sent to your email:</label>
             <input type="text" name="code" id="code" required placeholder="Enter verification code">
 
             <button type="submit">Verify Code</button>
