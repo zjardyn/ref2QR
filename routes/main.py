@@ -30,7 +30,7 @@ def index():
 
     # 1) Limit check
     if generated_qr_codes >= MAX_QR_CODES_PER_SESSION:
-        flash(f'You’ve reached the max of {MAX_QR_CODES_PER_SESSION} QR codes this session.')
+        flash(f"You've reached the max of {MAX_QR_CODES_PER_SESSION} QR codes this session.")
         session.clear()
         return redirect(url_for('main.index'))
 
@@ -39,7 +39,7 @@ def index():
 
     if request.method == 'POST':
 
-        # 2) “Finish pending” button
+        # 2) "Finish pending" button
         if request.form.get('pending_file_id'):
             # 1) grab the ID straight from the form
             file_id = request.form['pending_file_id']
@@ -61,6 +61,7 @@ def index():
             ref_list_url = url_for('main.show_references',
                                    ref_id=file_id,
                                    _external=True)
+            print(f"Generated Reference List URL (pending file): {ref_list_url}")
 
             # 4) generate the QR code data URL
             qr_image_url = generate_qr_data_url(ref_list_url)
@@ -109,8 +110,16 @@ def index():
                 return render_template('index.html', error=error)
 
             ref_id = str(uuid.uuid4())
-            # … save & generate QR …
+            # Save the Google Doc entry to the database
+            gdoc_db_entry = [{
+                'type': 'gdoc',
+                'url': gdoc_url,
+                'title': 'Google Document' # You might want to fetch the actual title if possible, or keep it generic
+            }]
+            database.save_reference_list(ref_id, gdoc_db_entry, expires_days=30)
+
             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+            print(f"Generated Reference List URL (Google Doc): {ref_list_url}")
             qr_image_url = generate_qr_data_url(ref_list_url)
             session['generated_qr_codes'] = generated_qr_codes + 1
 
@@ -129,8 +138,33 @@ def index():
         if file and allowed_file(file.filename):
             try:
                 ref_id = str(uuid.uuid4())
-                # … save reference list & generate QR …
+                
+                # Read file content
+                file_content = file.read() # Ensure file pointer is at the beginning if read multiple times
+                file.seek(0) # Reset file pointer if needed elsewhere, though for parsing once it's fine
+                
+                entries = []
+                filename_lower = file.filename.lower()
+                
+                # Parse based on file extension
+                if filename_lower.endswith('.bib'):
+                    entries = parse_bibtex_bytes(file_content)
+                elif filename_lower.endswith('.rdf'):
+                    entries = parse_rdf_bytes(file_content)
+                elif filename_lower.endswith('.ris'):
+                    entries = parse_ris_bytes(file_content)
+                elif filename_lower.endswith('.xml'): # Assuming EndNote XML
+                    entries = parse_endnote_xml_bytes(file_content)
+                else:
+                    # Should not happen if allowed_file is working correctly
+                    error = "Unsupported file type for parsing."
+                    return render_template('index.html', error=error, qr_image_url=None)
+                
+                # Save the reference list to database
+                database.save_reference_list(ref_id, entries, expires_days=30)
+                
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+                print(f"Generated Reference List URL (file upload): {ref_list_url}")
                 qr_image_url = generate_qr_data_url(ref_list_url)
 
                 session['generated_qr_codes'] = generated_qr_codes + 1
