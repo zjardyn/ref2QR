@@ -110,11 +110,13 @@ def index():
                 return render_template('index.html', error=error)
 
             ref_id = str(uuid.uuid4())
+            session_email = session.get('email') # Get email from session
             # Save the Google Doc entry to the database
             gdoc_db_entry = [{
                 'type': 'gdoc',
                 'url': gdoc_url,
-                'title': 'Google Document' # You might want to fetch the actual title if possible, or keep it generic
+                'title': 'Google Document', # You might want to fetch the actual title if possible, or keep it generic
+                'email': session_email # Add email to the entry
             }]
             database.save_reference_list(ref_id, gdoc_db_entry, expires_days=30)
 
@@ -138,6 +140,7 @@ def index():
         if file and allowed_file(file.filename):
             try:
                 ref_id = str(uuid.uuid4())
+                session_email = session.get('email') # Get email from session
                 
                 # Read file content
                 file_content = file.read() # Ensure file pointer is at the beginning if read multiple times
@@ -159,6 +162,11 @@ def index():
                     # Should not happen if allowed_file is working correctly
                     error = "Unsupported file type for parsing."
                     return render_template('index.html', error=error, qr_image_url=None)
+                
+                # Add email to each entry
+                if session_email:
+                    for entry in entries:
+                        entry['email'] = session_email
                 
                 # Save the reference list to database
                 database.save_reference_list(ref_id, entries, expires_days=30)
@@ -417,6 +425,7 @@ def verify_code():
             # Save to DB once, if not already there
             email = session.pop('pending_email', None)
             if email:
+                session['email'] = email  # Store the verified email in the session
                 save_verified_email(email)
 
         # Phone code matches
