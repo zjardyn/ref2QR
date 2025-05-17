@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 import json
 import datetime
 
@@ -25,16 +26,32 @@ class ReferenceList(db.Model):
             return False
         return datetime.datetime.utcnow() > self.expires_at
 
+class VerifiedEmail(db.Model):
+    """A single row per e‑mail address that has successfully passed verification."""
+
+    __tablename__ = "verified_emails"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(320), unique=True, nullable=False)
+    verified_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
+
 def save_reference_list(ref_id, entries, expires_days=None):
-    """Save a reference list to the database"""
+    """Save a reference list to the database (ignoring duplicates)."""
     expires_at = None
     if expires_days:
         expires_at = datetime.datetime.utcnow() + datetime.timedelta(days=expires_days)
 
-    reference_list = ReferenceList(id=ref_id, entries=entries, expires_at=expires_at)
+    reference_list = ReferenceList(
+        id=ref_id,
+        entries=entries,
+        expires_at=expires_at
+    )
     db.session.add(reference_list)
-    db.session.commit()
-
+    try:
+        db.session.commit()
+    except IntegrityError:
+        # someone already inserted this exact PK
+        db.session.rollback()
 def get_reference_list(ref_id):
     """Get a reference list from the database by ID"""
     reference_list = ReferenceList.query.get(ref_id)
@@ -91,4 +108,14 @@ def get_database_stats():
         'active_count': active_count,
         'expired_count': expired_count,
         'newest_info': newest_info
-    } 
+    }
+
+def save_verified_email(email: str):
+    """Insert *email* into VerifiedEmail if it isn’t already there."""
+    if not VerifiedEmail.query.filter_by(email=email).first():
+        db.session.add(VerifiedEmail(email=email))
+        db.session.commit()
+
+
+def is_email_verified(email: str) -> bool:
+    return VerifiedEmail.query.filter_by(email=email).first() is not None

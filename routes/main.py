@@ -9,6 +9,7 @@ import random
 from extensions import twilio_client, mail
 from flask_mail import Message
 from config import Config
+from database import save_verified_email
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime, timedelta
@@ -22,52 +23,100 @@ def allowed_file(filename):
 
 @main_bp.route('/', methods=['GET', 'POST'])
 def index():
-    # Set a limit for the number of QR codes a user can generate in a session
     MAX_QR_CODES_PER_SESSION = 15
-
-    # Get the current count of generated QR codes in this session
     generated_qr_codes = session.get('generated_qr_codes', 0)
+    pending_id   = session.get('pending_file_id')
+    pending_name = session.get('pending_filename')
 
-    # Check if the user has exceeded the limit
+    # 1) Limit check
     if generated_qr_codes >= MAX_QR_CODES_PER_SESSION:
-        flash(f'You have reached the maximum limit of {MAX_QR_CODES_PER_SESSION} QR codes for this session.')
-        session.clear()  # Clear the session (ends the session)
-        return redirect(url_for('main.index'))  # Redirect to the index page with a message
+        flash(f'You’ve reached the max of {MAX_QR_CODES_PER_SESSION} QR codes this session.')
+        session.clear()
+        return redirect(url_for('main.index'))
 
     error = None
     qr_image_url = None
 
     if request.method == 'POST':
-        # Check if the user clicked on either of the QR code generation options
-        # If the user is not verified, redirect to the verification page
-        if not session.get('email_verified') and not session.get('phone_verified'):
-            flash('Please verify your email or phone number to upload files.')
-            return redirect(url_for('main.verify'))  # Redirect to verification page if not verified
 
-        # Google Docs URL generation
+        # 2) “Finish pending” button
+        if request.form.get('pending_file_id'):
+            # 1) grab the ID straight from the form
+            file_id = request.form['pending_file_id']
+            if not file_id:
+                return redirect(url_for('main.index'))
+
+            # 2) persist your reference list so you can show it later
+            #    (you probably want to store something real here—
+            #     you can store an empty list or metadata if you just
+            #     need a placeholder)
+            example_entry = [{
+                'type': 'file',
+                'filename': session.get('pending_filename'),
+                # if you saved additional metadata on disk, point to it here
+            }]
+            database.save_reference_list(file_id, example_entry, expires_days=30)
+
+            # 3) build the external URL to your reference list
+            ref_list_url = url_for('main.show_references',
+                                   ref_id=file_id,
+                                   _external=True)
+
+            # 4) generate the QR code data URL
+            qr_image_url = generate_qr_data_url(ref_list_url)
+
+            # 5) increment your counter
+            session['generated_qr_codes'] = generated_qr_codes + 1
+
+            # 6) clean up both session keys and the temp file
+            session.pop('pending_file_id', None)
+            session.pop('pending_filename', None)
+            upload_folder = current_app.config['UPLOAD_FOLDER']
+            temp_path = os.path.join(upload_folder, file_id)
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+
+            return render_template(
+                'index.html',
+                error=error,
+                qr_image_url=qr_image_url
+            )
+
+        # 3) Not yet verified → stage file or redirect
+        if not session.get('email_verified') and not session.get('phone_verified'):
+            file = request.files.get('file')
+            if file and file.filename and allowed_file(file.filename):
+                # save temp file
+                file_id = str(uuid.uuid4())
+                filename = secure_filename(file.filename)
+                temp_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file_id)
+                file.save(temp_path)
+
+                session['pending_file_id']  = file_id
+                session['pending_filename'] = filename
+
+                flash('Please verify your email or phone to continue.')
+                return redirect(url_for('main.verify'))
+
+            flash('Please verify your email or phone number to upload files.')
+            return redirect(url_for('main.verify'))
+
+        # 4) Verified → handle Google‑Doc
         gdoc_url = request.form.get('gdoc_url', '').strip()
         if gdoc_url:
             if 'docs.google.com' not in gdoc_url:
                 error = 'Please provide a valid Google Docs URL'
                 return render_template('index.html', error=error)
 
-            # Create a reference entry for the Google Doc URL
             ref_id = str(uuid.uuid4())
-            gdoc_entry = [{
-                'type': 'gdoc',
-                'url': gdoc_url,
-                'title': 'Google Document'
-            }]
-            database.save_reference_list(ref_id, gdoc_entry, expires_days=30)
+            # … save & generate QR …
             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-            qr_image_url = generate_qr_data_url(ref_list_url)  # Generate the QR code for the Google Docs URL
-
-            # Increment the QR code count in the session
+            qr_image_url = generate_qr_data_url(ref_list_url)
             session['generated_qr_codes'] = generated_qr_codes + 1
 
             return render_template('index.html', error=error, qr_image_url=qr_image_url)
 
-        # Handle file uploads
+        # 5) Verified → handle fresh file upload
         if 'file' not in request.files:
             error = 'No file part'
             return render_template('index.html', error=error)
@@ -79,15 +128,12 @@ def index():
 
         if file and allowed_file(file.filename):
             try:
-                # Process the file (upload logic here)
-                ref_id = str(uuid.uuid4())  # Unique reference ID
+                ref_id = str(uuid.uuid4())
+                # … save reference list & generate QR …
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-                qr_image_url = generate_qr_data_url(ref_list_url)  # Generate QR code for file URL
+                qr_image_url = generate_qr_data_url(ref_list_url)
 
-                # Increment the QR code count in the session
                 session['generated_qr_codes'] = generated_qr_codes + 1
-
-                # Update upload count in session
                 session['upload_count'] = session.get('upload_count', 0) + 1
                 flash(f'Successfully uploaded {file.filename}')
                 return render_template('index.html', error=error, qr_image_url=qr_image_url)
@@ -95,8 +141,14 @@ def index():
             except Exception as e:
                 error = f"An error occurred: {e}"
 
-    return render_template('index.html', error=error, qr_image_url=qr_image_url)
-
+    # GET or fall‑through
+    return render_template(
+        'index.html',
+        error=error,
+        qr_image_url=qr_image_url,
+        pending_filename=pending_name,
+        pending_file_id=pending_id
+    )
 
 @main_bp.route('/refs/<ref_id>')
 def show_references(ref_id):
@@ -289,7 +341,7 @@ def download_references(ref_id):
 
 @main_bp.route('/verify', methods=['GET', 'POST'])
 def verify():
-    # If user is already verified, redirect to index
+    # If user is already verified, skip straight to index
     if session.get('email_verified') or session.get('phone_verified'):
         return redirect(url_for('main.index'))
 
@@ -298,31 +350,42 @@ def verify():
         phone = request.form.get('phone', '').strip()
 
         if email:
-            verification_code = generate_verification_code()
-            session['email_code'] = verification_code
+            code = generate_verification_code()
+            session['email_code']    = code
             session['email_verified'] = False
-            send_verification_email(email, verification_code)
+            session['pending_email']  = email   # remember which addr
+
+            send_verification_email(email, code)
             flash('Verification code sent to your email.')
-            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+            return redirect(url_for('main.verify_code'))
 
         elif phone:
-            verification_code = generate_verification_code()
-            session['phone_code'] = verification_code
+            code = generate_verification_code()
+            session['phone_code']    = code
             session['phone_verified'] = False
-            send_verification_sms(phone, verification_code)
+
+            send_verification_sms(phone, code)
             flash('Verification code sent to your phone.')
-            return redirect(url_for('main.verify_code'))  # Redirect to code entry form
+            return redirect(url_for('main.verify_code'))
 
     return render_template('verify.html')
 
 @main_bp.route('/verify_code', methods=['GET', 'POST'])
 def verify_code():
     if request.method == 'POST':
-        entered_code = request.form.get('code')
+        entered_code = request.form.get('code', '').strip()
 
+        # Email code matches
         if entered_code == session.get('email_code'):
             session['email_verified'] = True
             flash('Email successfully verified!')
+
+            # Save to DB once, if not already there
+            email = session.pop('pending_email', None)
+            if email:
+                save_verified_email(email)
+
+        # Phone code matches
         elif entered_code == session.get('phone_code'):
             session['phone_verified'] = True
             flash('Phone number successfully verified!')
