@@ -72,7 +72,8 @@ If you need to completely reset the database and remove all reference lists:
 http://localhost:5000/admin/delete-all?key=change_this_key_for_production
 ```
 
-**Warning**: This will permanently delete all references from the database. A confirmation page will be shown before deletion. Only use this as a last resort (or delete this functionality entirely). 
+**Warning**: This will permanently delete all references from the database. A confirmation page will be shown before deletion. Only use this as a last resort (or delete this functionality entirely). The password is hehexd69
+
 
 #### Database Statistics
 

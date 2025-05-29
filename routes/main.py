@@ -163,6 +163,11 @@ def index():
                     error = "Unsupported file type for parsing."
                     return render_template('index.html', error=error, qr_image_url=None)
                 
+                # Check if number of references exceeds limit
+                if len(entries) > 30:
+                    error = f"File contains {len(entries)} references. Maximum allowed is 30 references per file."
+                    return render_template('index.html', error=error, qr_image_url=None)
+                
                 # Add email to each entry
                 if session_email:
                     for entry in entries:
@@ -248,6 +253,7 @@ def show_references(ref_id):
 </body>
 </html>"""
         return html_redirect
+
     html_report = """<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -310,7 +316,7 @@ def show_references(ref_id):
 </head>
 <body>
     <h1>Reference List</h1>
-    <div id=\"references\">
+    <div id="references">
 """
     for entry in entries:
         cleaned_data = clean_and_structure_entry(entry)
