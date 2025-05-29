@@ -1,9 +1,83 @@
 {% extends "admin/admin_base.html" %}
 {% block content %}
-<h1>Confirm Delete All References</h1>
-<form method="post" action="{{ url_for('admin.delete_all_references') }}">
-  <input type="hidden" name="key" value="{{ request.args.get('key', '') }}">
-  <input type="hidden" name="confirm" value="yes">
-  <button type="submit">Yes, delete all references</button>
-</form>
+<div class="confirmation-box">
+    <h1>Delete All References</h1>
+    <p class="warning">{{ message }}</p>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        <input type="hidden" name="step" value="{{ step }}">
+        <input type="hidden" name="key" value="{{ key }}">
+        {% if step == 3 %}
+        <div class="password-field">
+            <label for="password">Enter password to confirm deletion:</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        {% endif %}
+        <div class="button-group">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{{ url_for('admin.database_stats', key=key) }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .confirmation-box {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .warning {
+        color: #dc3545;
+        font-weight: bold;
+        margin: 20px 0;
+        font-size: 1.2em;
+    }
+    .error {
+        color: #dc3545;
+        margin: 10px 0;
+        font-size: 1em;
+    }
+    .button-group {
+        margin-top: 20px;
+    }
+    .btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+    .btn:hover {
+        opacity: 0.9;
+    }
+    .password-field {
+        margin: 20px 0;
+    }
+    .password-field label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .password-field input {
+        padding: 8px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        width: 200px;
+    }
+</style>
 {% endblock %} 

@@ -27,23 +27,38 @@ def database_stats():
     stats = database.get_database_stats()
     return render_template('admin/stats.html', stats=stats)
 
-@admin_bp.route('/admin/delete-all', methods=['GET'])
+@admin_bp.route('/admin/delete-all', methods=['GET', 'POST'])
 def confirm_delete_all():
     """Show confirmation page for deleting all references."""
     # Check for maintenance key
     if request.args.get('key') != Config.MAINTENANCE_KEY:
         abort(403)
-        
-    return render_template('admin/confirm_delete.html')
-
-@admin_bp.route('/admin/delete-all/confirm', methods=['POST'])
-def delete_all_references():
-    """Delete all references from the database."""
-    # Accept key from form or query string
-    key = request.form.get('key') or request.args.get('key')
-    if key != Config.MAINTENANCE_KEY:
-        abort(403)
-    if request.form.get('confirm') != 'yes':
-        return redirect(url_for('admin.confirm_delete_all', key=Config.MAINTENANCE_KEY))
-    database.delete_all_references()
-    return "All references have been deleted" 
+    
+    if request.method == 'POST':
+        step = int(request.form.get('step', 1))
+        if step == 1:
+            return render_template('admin/confirm_delete.html', 
+                                step=2, 
+                                message="Are you really sure you want to delete these references?",
+                                key=request.args.get('key'))
+        elif step == 2:
+            return render_template('admin/confirm_delete.html', 
+                                step=3, 
+                                message="This is your last chance. Are you absolutely certain?",
+                                key=request.args.get('key'))
+        elif step == 3:
+            # Check password on final step
+            password = request.form.get('password', '')
+            if password != 'hehexd69':
+                return render_template('admin/confirm_delete.html',
+                                    step=3,
+                                    message="This is your last chance. Are you absolutely certain?",
+                                    key=request.args.get('key'),
+                                    error="Incorrect password. Please try again.")
+            count = database.delete_all_references()
+            return f"Successfully deleted {count} reference lists from the database."
+    
+    return render_template('admin/confirm_delete.html', 
+                         step=1, 
+                         message="Are you sure you want to delete all references?",
+                         key=request.args.get('key')) 
