@@ -41,21 +41,79 @@ def index():
 
         # 2) "Finish pending" button
         if request.form.get('pending_file_id'):
-            # 1) grab the ID straight from the form
             file_id = request.form['pending_file_id']
-            if not file_id:
+            pending_filename = session.get('pending_filename') # Get the original filename
+
+            if not file_id or not pending_filename:
+                flash("Error processing pending file. Please try uploading again.")
+                session.pop('pending_file_id', None)
+                session.pop('pending_filename', None)
                 return redirect(url_for('main.index'))
 
-            # 2) persist your reference list so you can show it later
-            #    (you probably want to store something real here—
-            #     you can store an empty list or metadata if you just
-            #     need a placeholder)
-            example_entry = [{
-                'type': 'file',
-                'filename': session.get('pending_filename'),
-                # if you saved additional metadata on disk, point to it here
-            }]
-            database.save_reference_list(file_id, example_entry, expires_days=30)
+            upload_folder = current_app.config['UPLOAD_FOLDER']
+            temp_path = os.path.join(upload_folder, file_id)
+
+            if not os.path.exists(temp_path):
+                flash("Pending file not found. It might have expired or been removed. Please try uploading again.")
+                session.pop('pending_file_id', None)
+                session.pop('pending_filename', None)
+                return redirect(url_for('main.index'))
+
+            try:
+                with open(temp_path, 'rb') as f:
+                    file_content = f.read()
+
+                entries = []
+                filename_lower = pending_filename.lower()
+
+                if filename_lower.endswith('.bib'):
+                    entries = parse_bibtex_bytes(file_content)
+                elif filename_lower.endswith('.rdf'):
+                    entries = parse_rdf_bytes(file_content)
+                elif filename_lower.endswith('.ris'):
+                    entries = parse_ris_bytes(file_content)
+                elif filename_lower.endswith('.xml'): # Assuming EndNote XML
+                    entries = parse_endnote_xml_bytes(file_content)
+                else:
+                    error = "Unsupported file type for pending file."
+                    flash(error)
+                    # Clean up session and temp file on error
+                    session.pop('pending_file_id', None)
+                    session.pop('pending_filename', None)
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                    return render_template('index.html', error=error, qr_image_url=None)
+
+                # Actual check for number of references
+                if len(entries) > 30:
+                    error = f"File contains {len(entries)} references. Maximum allowed is 30 references per file."
+                    flash(error)
+                    # Clean up session and temp file if limit exceeded
+                    session.pop('pending_file_id', None)
+                    session.pop('pending_filename', None)
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                    return render_template('index.html', error=error, qr_image_url=None)
+
+                # Add email to each entry if user is verified
+                session_email = session.get('email')
+                if session_email:
+                    for entry in entries:
+                        entry['email'] = session_email
+                
+                # Save the actual parsed entries to database
+                database.save_reference_list(file_id, entries, expires_days=30)
+
+            except Exception as e:
+                current_app.logger.error(f"Error processing pending file {file_id}: {e}")
+                flash(f"An error occurred while processing your pending file: {e}")
+                # Clean up session and temp file on exception
+                session.pop('pending_file_id', None)
+                session.pop('pending_filename', None)
+                if os.path.exists(temp_path):
+                    os.remove(temp_path)
+                return redirect(url_for('main.index'))
+
 
             # 3) build the external URL to your reference list
             ref_list_url = url_for('main.show_references',
@@ -69,17 +127,15 @@ def index():
             # 5) increment your counter
             session['generated_qr_codes'] = generated_qr_codes + 1
 
-            # 6) clean up both session keys and the temp file
+            # 6) clean up both session keys and the temp file (already cleaned on error/limit cases)
             session.pop('pending_file_id', None)
             session.pop('pending_filename', None)
-            upload_folder = current_app.config['UPLOAD_FOLDER']
-            temp_path = os.path.join(upload_folder, file_id)
-            if os.path.exists(temp_path):
+            if os.path.exists(temp_path): # Should already be gone if limit exceeded, but double check
                 os.remove(temp_path)
 
             return render_template(
                 'index.html',
-                error=error,
+                error=None, # Error should be None if we reached here
                 qr_image_url=qr_image_url
             )
 
@@ -166,6 +222,9 @@ def index():
                 # Check if number of references exceeds limit
                 if len(entries) > 30:
                     error = f"File contains {len(entries)} references. Maximum allowed is 30 references per file."
+                    flash(error)
+                    session.pop('pending_file_id', None)  # Clear the pending file ID
+                    session.pop('pending_filename', None)  # Clear the pending filename
                     return render_template('index.html', error=error, qr_image_url=None)
                 
                 # Add email to each entry
@@ -173,9 +232,10 @@ def index():
                     for entry in entries:
                         entry['email'] = session_email
                 
-                # Save the reference list to database
+                # Save the reference list to database only if the check passes
                 database.save_reference_list(ref_id, entries, expires_days=30)
                 
+                # Generate QR code only if the check passes
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
                 print(f"Generated Reference List URL (file upload): {ref_list_url}")
                 qr_image_url = generate_qr_data_url(ref_list_url)
