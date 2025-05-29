@@ -16,6 +16,55 @@ from datetime import datetime, timedelta
 
 main_bp = Blueprint('main', __name__)
 
+# Define fields that are essential for storage and HTML generation
+ALLOWED_FIELDS_FOR_STORAGE = {
+    # Core identifiers and types
+    'ID',               # BibTeX key or internal ID from parser
+    'ENTRYTYPE',        # From BibTeX, e.g., 'article', 'book'
+    'type',             # Can be from parser (like ENTRYTYPE) OR app-specific ('gdoc', 'file')
+
+    # For title
+    'title',
+
+    # For authors/editors
+    'author', 'authors', # Raw author string/list
+    'editor', 'editors', # Raw editor string/list
+
+    # For date/year information
+    'year',
+    'month',
+    'day',
+    'date',             # If a full date string is provided by parser
+
+    # For publication venue (journal/book)
+    'journal', 'journaltitle',
+    'booktitle',
+    'series',           # e.g., for reports or book series
+    'publisher',        # For books/proceedings
+
+    # For volume, issue, pages
+    'volume',
+    'number',           # Often used for issue number
+    'issue',
+    'pages',
+    'articleno',        # Article number, can substitute for pages in some journal styles
+
+    # For DOI and URL
+    'doi',
+    'url',              # Generic URL, or specific for GDoc
+
+    # App-specific fields added in routes/main.py or needed for app logic
+    'filename',         # For pending file logic (app-specific)
+    'email',            # Added by the app for user tracking (app-specific)
+    # 'note' is intentionally omitted to save space, unless critical parsing info is there
+}
+
+def _filter_entry_for_storage(entry_dict):
+    """Filters an entry dictionary to keep only allowed fields for storage."""
+    if not isinstance(entry_dict, dict): # Ensure it's a dictionary
+        return entry_dict # Or handle error appropriately
+    return {k: v for k, v in entry_dict.items() if k in ALLOWED_FIELDS_FOR_STORAGE}
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
@@ -63,51 +112,50 @@ def index():
                 with open(temp_path, 'rb') as f:
                     file_content = f.read()
 
-                entries = []
+                parsed_entries = []
                 filename_lower = pending_filename.lower()
 
                 if filename_lower.endswith('.bib'):
-                    entries = parse_bibtex_bytes(file_content)
+                    parsed_entries = parse_bibtex_bytes(file_content)
                 elif filename_lower.endswith('.rdf'):
-                    entries = parse_rdf_bytes(file_content)
+                    parsed_entries = parse_rdf_bytes(file_content)
                 elif filename_lower.endswith('.ris'):
-                    entries = parse_ris_bytes(file_content)
+                    parsed_entries = parse_ris_bytes(file_content)
                 elif filename_lower.endswith('.xml'): # Assuming EndNote XML
-                    entries = parse_endnote_xml_bytes(file_content)
+                    parsed_entries = parse_endnote_xml_bytes(file_content)
                 else:
                     error = "Unsupported file type for pending file."
                     flash(error)
-                    # Clean up session and temp file on error
                     session.pop('pending_file_id', None)
                     session.pop('pending_filename', None)
                     if os.path.exists(temp_path):
                         os.remove(temp_path)
                     return render_template('index.html', error=error, qr_image_url=None)
 
-                # Actual check for number of references
-                if len(entries) > 30:
-                    error = f"File contains {len(entries)} references. Maximum allowed is 30 references per file."
+                # Actual check for number of references using original parsed count
+                if len(parsed_entries) > 30:
+                    error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30 references per file."
                     flash(error)
-                    # Clean up session and temp file if limit exceeded
                     session.pop('pending_file_id', None)
                     session.pop('pending_filename', None)
                     if os.path.exists(temp_path):
                         os.remove(temp_path)
                     return render_template('index.html', error=error, qr_image_url=None)
 
-                # Add email to each entry if user is verified
+                # Add email and then filter entries for storage
                 session_email = session.get('email')
-                if session_email:
-                    for entry in entries:
+                processed_entries_for_storage = []
+                for entry in parsed_entries:
+                    if session_email and isinstance(entry, dict):
                         entry['email'] = session_email
+                    processed_entries_for_storage.append(_filter_entry_for_storage(entry))
                 
-                # Save the actual parsed entries to database
-                database.save_reference_list(file_id, entries, expires_days=30)
+                # Save the filtered actual parsed entries to database
+                database.save_reference_list(file_id, processed_entries_for_storage, expires_days=30)
 
             except Exception as e:
                 current_app.logger.error(f"Error processing pending file {file_id}: {e}")
                 flash(f"An error occurred while processing your pending file: {e}")
-                # Clean up session and temp file on exception
                 session.pop('pending_file_id', None)
                 session.pop('pending_filename', None)
                 if os.path.exists(temp_path):
@@ -167,14 +215,17 @@ def index():
 
             ref_id = str(uuid.uuid4())
             session_email = session.get('email') # Get email from session
-            # Save the Google Doc entry to the database
-            gdoc_db_entry = [{
+            
+            gdoc_db_entry_raw = [{
                 'type': 'gdoc',
                 'url': gdoc_url,
-                'title': 'Google Document', # You might want to fetch the actual title if possible, or keep it generic
-                'email': session_email # Add email to the entry
+                'title': 'Google Document', 
+                'email': session_email 
             }]
-            database.save_reference_list(ref_id, gdoc_db_entry, expires_days=30)
+            # Filter GDoc entry (though it's already minimal)
+            filtered_gdoc_entry = [_filter_entry_for_storage(entry) for entry in gdoc_db_entry_raw]
+            
+            database.save_reference_list(ref_id, filtered_gdoc_entry, expires_days=30)
 
             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
             print(f"Generated Reference List URL (Google Doc): {ref_list_url}")
@@ -198,44 +249,40 @@ def index():
                 ref_id = str(uuid.uuid4())
                 session_email = session.get('email') # Get email from session
                 
-                # Read file content
-                file_content = file.read() # Ensure file pointer is at the beginning if read multiple times
-                file.seek(0) # Reset file pointer if needed elsewhere, though for parsing once it's fine
+                file_content = file.read() 
+                file.seek(0) 
                 
-                entries = []
+                parsed_entries = []
                 filename_lower = file.filename.lower()
                 
-                # Parse based on file extension
                 if filename_lower.endswith('.bib'):
-                    entries = parse_bibtex_bytes(file_content)
+                    parsed_entries = parse_bibtex_bytes(file_content)
                 elif filename_lower.endswith('.rdf'):
-                    entries = parse_rdf_bytes(file_content)
+                    parsed_entries = parse_rdf_bytes(file_content)
                 elif filename_lower.endswith('.ris'):
-                    entries = parse_ris_bytes(file_content)
-                elif filename_lower.endswith('.xml'): # Assuming EndNote XML
-                    entries = parse_endnote_xml_bytes(file_content)
+                    parsed_entries = parse_ris_bytes(file_content)
+                elif filename_lower.endswith('.xml'): 
+                    parsed_entries = parse_endnote_xml_bytes(file_content)
                 else:
-                    # Should not happen if allowed_file is working correctly
                     error = "Unsupported file type for parsing."
                     return render_template('index.html', error=error, qr_image_url=None)
                 
-                # Check if number of references exceeds limit
-                if len(entries) > 30:
-                    error = f"File contains {len(entries)} references. Maximum allowed is 30 references per file."
+                # Check if number of references exceeds limit (on original parsed entries)
+                if len(parsed_entries) > 30:
+                    error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30 references per file."
                     flash(error)
-                    session.pop('pending_file_id', None)  # Clear the pending file ID
-                    session.pop('pending_filename', None)  # Clear the pending filename
                     return render_template('index.html', error=error, qr_image_url=None)
                 
-                # Add email to each entry
-                if session_email:
-                    for entry in entries:
+                # Add email and then filter entries for storage
+                processed_entries_for_storage = []
+                for entry in parsed_entries:
+                    if session_email and isinstance(entry, dict): # Ensure entry is a dict
                         entry['email'] = session_email
+                    processed_entries_for_storage.append(_filter_entry_for_storage(entry))
                 
-                # Save the reference list to database only if the check passes
-                database.save_reference_list(ref_id, entries, expires_days=30)
+                # Save the filtered reference list to database
+                database.save_reference_list(ref_id, processed_entries_for_storage, expires_days=30)
                 
-                # Generate QR code only if the check passes
                 ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
                 print(f"Generated Reference List URL (file upload): {ref_list_url}")
                 qr_image_url = generate_qr_data_url(ref_list_url)
