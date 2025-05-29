@@ -22,8 +22,12 @@ def generate_qr_data_url(data_url: str) -> str:
         logo = Image.open(logo_path).convert('RGBA')
 
         width, height = img.size
-        logo_size = int(width * 0.25)
-        logo = logo.resize((logo_size, logo_size), Image.LANCZOS)
+        # Calculate the aspect ratio of the logo
+        logo_aspect_ratio = logo.width / logo.height
+        logo_size = int(width * 0.35)
+        logo_width = logo_size
+        logo_height = int(logo_width / logo_aspect_ratio)
+        logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
         pos = ((width - logo_size) // 2, (height - logo_size) // 2)
         mask = logo.split()[3] if len(logo.split()) == 4 else None
         img.paste(logo, pos, mask)
