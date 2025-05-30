@@ -210,11 +210,10 @@ def index():
                 file.save(temp_path)
                 session['pending_file_id']  = file_id
                 session['pending_filename'] = filename
-                flash('File saved. Please verify your email or phone to generate the QR code.', 'info')
+                session['verifying_for_pending_file'] = True # Flag for pending file verification
                 return redirect(url_for('main.verify'))
             elif gdoc_url_unverified and is_valid_google_doc_url(gdoc_url_unverified):
                 session['pending_gdoc_url'] = gdoc_url_unverified
-                flash('Google Doc URL saved. Please verify your email or phone to generate the QR code.', 'info')
                 return redirect(url_for('main.verify'))
             elif gdoc_url_unverified: # Invalid GDoc URL submitted by unverified user
                 error = "Invalid Google Docs URL. Please ensure it starts with 'https://docs.google.com/document/d/' and check for typos."
@@ -276,6 +275,30 @@ def index():
                             error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30."
                         
                         if not error:
+                            # Process sort order
+                            sort_order_str = request.form.get('sort_order', '').strip()
+                            if sort_order_str:
+                                try:
+                                    # Convert to 0-based indexing for list manipulation
+                                    sort_indices = [int(x.strip()) - 1 for x in sort_order_str.split(',')]
+                                    
+                                    # Validate sort_indices
+                                    if len(sort_indices) != len(parsed_entries):
+                                        error = "Sort order length must match the number of references."
+                                    elif any(i < 0 or i >= len(parsed_entries) for i in sort_indices):
+                                        error = "Sort order contains invalid reference numbers."
+                                    elif len(set(sort_indices)) != len(sort_indices):
+                                        error = "Sort order contains duplicate reference numbers."
+                                    else:
+                                        # Reorder parsed_entries
+                                        parsed_entries = [parsed_entries[i] for i in sort_indices]
+                                except ValueError:
+                                    error = "Invalid format for sort order. Please use comma-separated numbers (e.g., 2,1,3)."
+
+                            if error: # If error occurred during sort order processing
+                                flash(error, 'error')
+                                return render_template('index.html', error=error, qr_image_url=None, pending_filename=pending_name, pending_file_id=pending_id, gdoc_url_to_populate=gdoc_url_to_populate)
+
                             processed_entries_for_storage = []
                             for entry_item in parsed_entries:
                                 if session_email and isinstance(entry_item, dict): entry_item['email'] = session_email
@@ -526,7 +549,8 @@ def verify():
             session['pending_email']  = email   # remember which addr
 
             send_verification_email(email, code)
-            flash('Verification code sent to your email.', 'info')
+            if not session.get('verifying_for_pending_file'): # Only flash if not verifying for a pending file
+                flash('Verification code sent to your email.', 'info')
             return redirect(url_for('main.verify_code'))
 
         elif phone:
@@ -535,7 +559,8 @@ def verify():
             session['phone_verified'] = False
 
             send_verification_sms(phone, code)
-            flash('Verification code sent to your phone.', 'info')
+            if not session.get('verifying_for_pending_file'): # Only flash if not verifying for a pending file
+                flash('Verification code sent to your phone.', 'info')
             return redirect(url_for('main.verify_code'))
 
     return render_template('verify.html')
@@ -544,11 +569,13 @@ def verify():
 def verify_code():
     if request.method == 'POST':
         entered_code = request.form.get('code', '').strip()
+        was_verifying_for_pending_file = session.pop('verifying_for_pending_file', False) # Check and clear the flag
 
         # Email code matches
         if entered_code == session.get('email_code'):
             session['email_verified'] = True
-            flash('Email successfully verified!', 'success')
+            if not was_verifying_for_pending_file: # Only flash if not verifying for a pending file
+                flash('Email successfully verified!', 'success')
 
             # Save to DB once, if not already there
             email = session.pop('pending_email', None)
@@ -559,9 +586,13 @@ def verify_code():
         # Phone code matches
         elif entered_code == session.get('phone_code'):
             session['phone_verified'] = True
-            flash('Phone number successfully verified!', 'success')
+            if not was_verifying_for_pending_file: # Only flash if not verifying for a pending file
+                flash('Phone number successfully verified!', 'success')
         else:
-            flash('Invalid verification code.', 'error')
+            if not was_verifying_for_pending_file: # Avoid duplicate flash if code was wrong for pending file flow
+                flash('Invalid verification code.', 'error')
+            else: # If it was for a pending file, a generic error might be better or handled on redirect to index
+                flash('Invalid verification code. Please try the file upload process again if needed.', 'error')
 
         return redirect(url_for('main.index'))
 
