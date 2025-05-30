@@ -173,7 +173,7 @@ def index():
                         entry_item['email'] = session_email
                     processed_entries_for_storage.append(_filter_entry_for_storage(entry_item))
                 
-                database.save_reference_list(file_id, processed_entries_for_storage, expires_days=30)
+                database.save_reference_list(file_id, processed_entries_for_storage, expires_days=730)
 
             except Exception as e:
                 current_app.logger.error(f"Error processing pending file {file_id}: {e}")
@@ -186,6 +186,7 @@ def index():
                 return redirect(url_for('main.index'))
 
             ref_list_url = url_for('main.show_references', ref_id=file_id, _external=True)
+            print(f"Reference List URL: {ref_list_url}")
             qr_image_url = generate_qr_data_url(ref_list_url)
             session['generated_qr_codes'] = generated_qr_codes + 1
             session.pop('pending_file_id', None)
@@ -244,8 +245,9 @@ def index():
                     session_email = session.get('email')
                     gdoc_db_entry_raw = [{'type': 'gdoc', 'url': gdoc_url_submission, 'title': 'Google Document', 'email': session_email}]
                     filtered_gdoc_entry = [_filter_entry_for_storage(entry) for entry in gdoc_db_entry_raw]
-                    database.save_reference_list(ref_id, filtered_gdoc_entry, expires_days=30)
+                    database.save_reference_list(ref_id, filtered_gdoc_entry, expires_days=730)
                     ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+                    print(f"Google Doc Reference URL: {ref_list_url}")
                     qr_image_url = generate_qr_data_url(ref_list_url)
                     session['generated_qr_codes'] = generated_qr_codes + 1
                     return render_template('index.html', error=None, qr_image_url=qr_image_url, pending_filename=pending_name, pending_file_id=pending_id, gdoc_url_to_populate=None)
@@ -278,8 +280,9 @@ def index():
                             for entry_item in parsed_entries:
                                 if session_email and isinstance(entry_item, dict): entry_item['email'] = session_email
                                 processed_entries_for_storage.append(_filter_entry_for_storage(entry_item))
-                            database.save_reference_list(ref_id, processed_entries_for_storage, expires_days=30)
+                            database.save_reference_list(ref_id, processed_entries_for_storage, expires_days=730)
                             ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+                            print(f"Reference List URL: {ref_list_url}")
                             qr_image_url = generate_qr_data_url(ref_list_url)
                             session['generated_qr_codes'] = generated_qr_codes + 1
                             flash(f'Successfully uploaded {file.filename}', 'success')
