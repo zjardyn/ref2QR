@@ -297,7 +297,17 @@ def index():
 
                             if error: # If error occurred during sort order processing
                                 flash(error, 'error')
-                                return render_template('index.html', error=error, qr_image_url=None, pending_filename=pending_name, pending_file_id=pending_id, gdoc_url_to_populate=gdoc_url_to_populate)
+                                current_sort_order_input = request.form.get('sort_order', '') # Get user's input
+                                # Pass error=None to rely on flashed message, and pass sort_order_to_populate
+                                return render_template(
+                                    'index.html', 
+                                    error=None, 
+                                    qr_image_url=None, 
+                                    pending_filename=pending_name, # from top of index() scope
+                                    pending_file_id=pending_id,   # from top of index() scope
+                                    gdoc_url_to_populate=gdoc_url_to_populate, # from top of index() scope
+                                    sort_order_to_populate=current_sort_order_input
+                                )
 
                             processed_entries_for_storage = []
                             for entry_item in parsed_entries:
