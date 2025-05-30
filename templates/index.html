@@ -7,7 +7,13 @@
   <style>
     body{font-family:sans-serif;background:#f5f5f5;margin:0;padding:0}
     .content{max-width:800px;margin:2em auto;background:#fff;padding:2em;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.1)}
-    .error{color:#c0392b;margin:1em 0}
+    .error{color:#c0392b;margin:1em 0;padding:10px;border:1px solid #c0392b;background:#fdd;border-radius:4px;}
+    .flashed-messages {list-style-type: none; padding: 0; margin: 1em 0;}
+    .flashed-messages li {padding: 10px; border-radius: 4px; margin-bottom: 10px;}
+    .flashed-messages li.error {color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb;}
+    .flashed-messages li.success {color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb;}
+    .flashed-messages li.info {color: #0c5460; background-color: #d1ecf1; border: 1px solid #bee5eb;}
+    .flashed-messages li.warning {color: #856404; background-color: #fff3cd; border: 1px solid #ffeeba;}
     .qr-code{margin:2em 0;padding:2em;background:#f9f9f9;border-radius:8px;text-align:center}
     .option-section{margin:2em 0;padding:1.5em;border:1px solid #ddd;border-radius:8px}
     .option-title{margin:0;color:#2c3e50}
@@ -24,7 +30,19 @@
   <div class="content">
     <h1>QR Code Generator</h1>
 
+    {# Display the direct error message first, if it exists #}
     {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+    {# Display all flashed messages #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashed-messages">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
     {% if qr_image_url %}
     <div class="qr-code">
@@ -43,7 +61,7 @@
         <p>Enter the URL of your Google Doc and get a QR code.</p>
         <form id="gdoc-form" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." pattern="https://docs\.google\.com/document/d/[a-zA-Z0-9_-]+(/edit)?(/.*)?" required>
+            <input type="text" id="gdoc_url" name="gdoc_url" placeholder="https://docs.google.com/document/d/..." pattern="https://docs\.google\.com/document/d/[a-zA-Z0-9_-]+(/edit)?(/.*)?" required value="{{ gdoc_url_to_populate or '' }}">
           </div>
           <input type="submit" value="Generate QR">
         </form>

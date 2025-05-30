@@ -89,25 +89,36 @@ def index():
     generated_qr_codes = session.get('generated_qr_codes', 0)
     pending_id   = session.get('pending_file_id')
     pending_name = session.get('pending_filename')
+    pending_gdoc_url_from_session = session.get('pending_gdoc_url')
 
     # 1) Limit check
     if generated_qr_codes >= MAX_QR_CODES_PER_SESSION:
-        flash(f"You've reached the max of {MAX_QR_CODES_PER_SESSION} QR codes this session.")
+        flash(f"You've reached the max of {MAX_QR_CODES_PER_SESSION} QR codes this session.", 'warning')
         session.clear()
         return redirect(url_for('main.index'))
 
     error = None
     qr_image_url = None
+    gdoc_url_to_populate = None # For pre-filling the GDoc URL field
+
+    # Check for and handle pending GDoc URL from session if user is verified
+    if pending_gdoc_url_from_session and (session.get('email_verified') or session.get('phone_verified')):
+        session.pop('_flashes', None) # Clear previous flashes
+        if not is_valid_google_doc_url(pending_gdoc_url_from_session):
+            flash('A previously submitted Google Docs URL was invalid and has been cleared.', 'error')
+        else:
+            gdoc_url_to_populate = pending_gdoc_url_from_session
+        session.pop('pending_gdoc_url', None)
 
     if request.method == 'POST':
-
-        # 2) "Finish pending" button
+        # 2) "Finish pending" button (for files)
         if request.form.get('pending_file_id'):
             file_id = request.form['pending_file_id']
             pending_filename = session.get('pending_filename') # Get the original filename
 
             if not file_id or not pending_filename:
-                flash("Error processing pending file. Please try uploading again.")
+                session.pop('_flashes', None) # Clear before flashing new error
+                flash("Error processing pending file. Please try uploading again.", 'error')
                 session.pop('pending_file_id', None)
                 session.pop('pending_filename', None)
                 return redirect(url_for('main.index'))
@@ -116,7 +127,8 @@ def index():
             temp_path = os.path.join(upload_folder, file_id)
 
             if not os.path.exists(temp_path):
-                flash("Pending file not found. It might have expired or been removed. Please try uploading again.")
+                session.pop('_flashes', None) # Clear before flashing new error
+                flash("Pending file not found. It might have expired or been removed. Please try uploading again.", 'error')
                 session.pop('pending_file_id', None)
                 session.pop('pending_filename', None)
                 return redirect(url_for('main.index'))
@@ -143,178 +155,153 @@ def index():
                     session.pop('pending_filename', None)
                     if os.path.exists(temp_path):
                         os.remove(temp_path)
-                    return render_template('index.html', error=error, qr_image_url=None)
+                    return render_template('index.html', error=error, qr_image_url=None, gdoc_url_to_populate=gdoc_url_to_populate, pending_filename=pending_name, pending_file_id=pending_id)
 
-                # Actual check for number of references using original parsed count
                 if len(parsed_entries) > 30:
                     error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30 references per file."
-                    flash(error)
+                    flash(error, 'error')
                     session.pop('pending_file_id', None)
                     session.pop('pending_filename', None)
                     if os.path.exists(temp_path):
                         os.remove(temp_path)
-                    return render_template('index.html', error=error, qr_image_url=None)
+                    return render_template('index.html', error=error, qr_image_url=None, gdoc_url_to_populate=gdoc_url_to_populate, pending_filename=pending_name, pending_file_id=pending_id)
 
-                # Add email and then filter entries for storage
                 session_email = session.get('email')
                 processed_entries_for_storage = []
-                for entry in parsed_entries:
-                    if session_email and isinstance(entry, dict):
-                        entry['email'] = session_email
-                    processed_entries_for_storage.append(_filter_entry_for_storage(entry))
+                for entry_item in parsed_entries:
+                    if session_email and isinstance(entry_item, dict):
+                        entry_item['email'] = session_email
+                    processed_entries_for_storage.append(_filter_entry_for_storage(entry_item))
                 
-                # Save the filtered actual parsed entries to database
                 database.save_reference_list(file_id, processed_entries_for_storage, expires_days=30)
 
             except Exception as e:
                 current_app.logger.error(f"Error processing pending file {file_id}: {e}")
-                flash(f"An error occurred while processing your pending file: {e}")
+                session.pop('_flashes', None) # Clear before flashing new error
+                flash(f"An error occurred while processing your pending file: {str(e)[:100]}", 'error') # Truncate long errors for flash
                 session.pop('pending_file_id', None)
                 session.pop('pending_filename', None)
                 if os.path.exists(temp_path):
                     os.remove(temp_path)
                 return redirect(url_for('main.index'))
 
-
-            # 3) build the external URL to your reference list
-            ref_list_url = url_for('main.show_references',
-                                   ref_id=file_id,
-                                   _external=True)
-            print(f"Generated Reference List URL (pending file): {ref_list_url}")
-
-            # 4) generate the QR code data URL
+            ref_list_url = url_for('main.show_references', ref_id=file_id, _external=True)
             qr_image_url = generate_qr_data_url(ref_list_url)
-
-            # 5) increment your counter
             session['generated_qr_codes'] = generated_qr_codes + 1
-
-            # 6) clean up both session keys and the temp file (already cleaned on error/limit cases)
             session.pop('pending_file_id', None)
             session.pop('pending_filename', None)
-            if os.path.exists(temp_path): # Should already be gone if limit exceeded, but double check
+            if os.path.exists(temp_path):
                 os.remove(temp_path)
+            
+            session.pop('_flashes', None) # Clear other flashes
+            flash(f'QR code generated for your file: {pending_filename}', 'success') # Use original pending_filename here
+            return render_template('index.html', error=None, qr_image_url=qr_image_url, gdoc_url_to_populate=gdoc_url_to_populate, pending_filename=None, pending_file_id=None)
 
-            return render_template(
-                'index.html',
-                error=None, # Error should be None if we reached here
-                qr_image_url=qr_image_url
-            )
-
-        # 3) Not yet verified → stage file or redirect
-        if not session.get('email_verified') and not session.get('phone_verified'):
+        # 3) Not yet verified → stage file or GDoc URL
+        elif not session.get('email_verified') and not session.get('phone_verified'):
             file = request.files.get('file')
+            gdoc_url_unverified = request.form.get('gdoc_url', '').strip()
+
             if file and file.filename and allowed_file(file.filename):
-                # save temp file
                 file_id = str(uuid.uuid4())
                 filename = secure_filename(file.filename)
                 temp_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file_id)
                 file.save(temp_path)
-
                 session['pending_file_id']  = file_id
                 session['pending_filename'] = filename
-
-                flash('Please verify your email or phone to continue.')
+                flash('File saved. Please verify your email or phone to generate the QR code.', 'info')
                 return redirect(url_for('main.verify'))
-
-            flash('Please verify your email or phone number to upload files.')
+            elif gdoc_url_unverified and is_valid_google_doc_url(gdoc_url_unverified):
+                session['pending_gdoc_url'] = gdoc_url_unverified
+                flash('Google Doc URL saved. Please verify your email or phone to generate the QR code.', 'info')
+                return redirect(url_for('main.verify'))
+            elif gdoc_url_unverified: # Invalid GDoc URL submitted by unverified user
+                error = "Invalid Google Docs URL. Please ensure it starts with 'https://docs.google.com/document/d/' and check for typos."
+                session.pop('_flashes', None) # Clear any existing flashed messages
+                return render_template(
+                    'index.html',
+                    error=error, 
+                    qr_image_url=None,
+                    pending_filename=pending_name, 
+                    pending_file_id=pending_id,
+                    gdoc_url_to_populate=None # Don't repopulate with the invalid URL
+                )
+            
+            # If neither file nor GDoc URL was provided by unverified user
+            flash('Please provide a file or a Google Doc URL, then verify your email or phone to continue.', 'warning')
             return redirect(url_for('main.verify'))
 
-        # 4) Verified → handle Google‑Doc
-        gdoc_url = request.form.get('gdoc_url', '').strip()
-        if gdoc_url:
-            if not is_valid_google_doc_url(gdoc_url):
-                error = 'Please provide a valid Google Docs URL (e.g., https://docs.google.com/document/d/1234567890/edit)'
-                return render_template('index.html', error=error)
+        # 4) Verified user: Process new GDoc submission or new file upload
+        else:
+            gdoc_url_submission = request.form.get('gdoc_url', '').strip()
 
-            ref_id = str(uuid.uuid4())
-            session_email = session.get('email') # Get email from session
-            
-            gdoc_db_entry_raw = [{
-                'type': 'gdoc',
-                'url': gdoc_url,
-                'title': 'Google Document', 
-                'email': session_email 
-            }]
-            # Filter GDoc entry (though it's already minimal)
-            filtered_gdoc_entry = [_filter_entry_for_storage(entry) for entry in gdoc_db_entry_raw]
-            
-            database.save_reference_list(ref_id, filtered_gdoc_entry, expires_days=30)
-
-            ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-            print(f"Generated Reference List URL (Google Doc): {ref_list_url}")
-            qr_image_url = generate_qr_data_url(ref_list_url)
-            session['generated_qr_codes'] = generated_qr_codes + 1
-
-            return render_template('index.html', error=error, qr_image_url=qr_image_url)
-
-        # 5) Verified → handle fresh file upload
-        if 'file' not in request.files:
-            error = 'No file part'
-            return render_template('index.html', error=error)
-
-        file = request.files['file']
-        if file.filename == '':
-            error = 'No selected file or Google Docs URL provided'
-            return render_template('index.html', error=error)
-
-        if file and allowed_file(file.filename):
-            try:
-                ref_id = str(uuid.uuid4())
-                session_email = session.get('email') # Get email from session
-                
-                file_content = file.read() 
-                file.seek(0) 
-                
-                parsed_entries = []
-                filename_lower = file.filename.lower()
-                
-                if filename_lower.endswith('.bib'):
-                    parsed_entries = parse_bibtex_bytes(file_content)
-                elif filename_lower.endswith('.rdf'):
-                    parsed_entries = parse_rdf_bytes(file_content)
-                elif filename_lower.endswith('.ris'):
-                    parsed_entries = parse_ris_bytes(file_content)
-                elif filename_lower.endswith('.xml'): 
-                    parsed_entries = parse_endnote_xml_bytes(file_content)
+            if gdoc_url_submission:
+                if not is_valid_google_doc_url(gdoc_url_submission):
+                    error = 'Please provide a valid Google Docs URL (e.g., https://docs.google.com/document/d/1234567890/edit)'
+                    # Fall through to render template with error and gdoc_url_to_populate (which might be the invalid one or a previously valid one)
                 else:
-                    error = "Unsupported file type for parsing."
-                    return render_template('index.html', error=error, qr_image_url=None)
-                
-                # Check if number of references exceeds limit (on original parsed entries)
-                if len(parsed_entries) > 30:
-                    error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30 references per file."
-                    flash(error)
-                    return render_template('index.html', error=error, qr_image_url=None)
-                
-                # Add email and then filter entries for storage
-                processed_entries_for_storage = []
-                for entry in parsed_entries:
-                    if session_email and isinstance(entry, dict): # Ensure entry is a dict
-                        entry['email'] = session_email
-                    processed_entries_for_storage.append(_filter_entry_for_storage(entry))
-                
-                # Save the filtered reference list to database
-                database.save_reference_list(ref_id, processed_entries_for_storage, expires_days=30)
-                
-                ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
-                print(f"Generated Reference List URL (file upload): {ref_list_url}")
-                qr_image_url = generate_qr_data_url(ref_list_url)
+                    ref_id = str(uuid.uuid4())
+                    session_email = session.get('email')
+                    gdoc_db_entry_raw = [{'type': 'gdoc', 'url': gdoc_url_submission, 'title': 'Google Document', 'email': session_email}]
+                    filtered_gdoc_entry = [_filter_entry_for_storage(entry) for entry in gdoc_db_entry_raw]
+                    database.save_reference_list(ref_id, filtered_gdoc_entry, expires_days=30)
+                    ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+                    qr_image_url = generate_qr_data_url(ref_list_url)
+                    session['generated_qr_codes'] = generated_qr_codes + 1
+                    return render_template('index.html', error=None, qr_image_url=qr_image_url, pending_filename=pending_name, pending_file_id=pending_id, gdoc_url_to_populate=None)
 
-                session['generated_qr_codes'] = generated_qr_codes + 1
-                session['upload_count'] = session.get('upload_count', 0) + 1
-                flash(f'Successfully uploaded {file.filename}')
-                return render_template('index.html', error=error, qr_image_url=qr_image_url)
+            elif 'file' in request.files:
+                file = request.files['file']
+                if file.filename == '':
+                    if not gdoc_url_submission: # Only error if GDoc wasn't also provided
+                        error = 'No selected file or Google Docs URL provided'
+                elif file and allowed_file(file.filename):
+                    try:
+                        ref_id = str(uuid.uuid4())
+                        session_email = session.get('email')
+                        file_content = file.read()
+                        file.seek(0)
+                        parsed_entries = []
+                        filename_lower = file.filename.lower()
 
-            except Exception as e:
-                error = f"An error occurred: {e}"
+                        if filename_lower.endswith('.bib'): parsed_entries = parse_bibtex_bytes(file_content)
+                        elif filename_lower.endswith('.rdf'): parsed_entries = parse_rdf_bytes(file_content)
+                        elif filename_lower.endswith('.ris'): parsed_entries = parse_ris_bytes(file_content)
+                        elif filename_lower.endswith('.xml'): parsed_entries = parse_endnote_xml_bytes(file_content)
+                        else: error = "Unsupported file type for parsing." # Should be caught by allowed_file
 
-    # GET or fall‑through
+                        if not error and len(parsed_entries) > 30:
+                            error = f"File contains {len(parsed_entries)} references. Maximum allowed is 30."
+                        
+                        if not error:
+                            processed_entries_for_storage = []
+                            for entry_item in parsed_entries:
+                                if session_email and isinstance(entry_item, dict): entry_item['email'] = session_email
+                                processed_entries_for_storage.append(_filter_entry_for_storage(entry_item))
+                            database.save_reference_list(ref_id, processed_entries_for_storage, expires_days=30)
+                            ref_list_url = url_for('main.show_references', ref_id=ref_id, _external=True)
+                            qr_image_url = generate_qr_data_url(ref_list_url)
+                            session['generated_qr_codes'] = generated_qr_codes + 1
+                            flash(f'Successfully uploaded {file.filename}', 'success')
+                            return render_template('index.html', error=None, qr_image_url=qr_image_url, pending_filename=pending_name, pending_file_id=pending_id, gdoc_url_to_populate=None)
+                    except Exception as e:
+                        current_app.logger.error(f"Error processing uploaded file: {e}")
+                        error = f"An error occurred while processing the file: {str(e)[:100]}" # Truncate long errors
+                # If file not allowed or other file error, error variable should be set, will fall through
+            
+            # If POST but no GDoc URL and no valid file submitted by a verified user
+            elif not gdoc_url_submission and (not request.files.get('file') or request.files.get('file').filename == ''):
+                 error = 'No selected file or Google Docs URL provided'
+
+
+    # GET request or fall-through from POST if no action resulted in a direct render/redirect
     return render_template(
         'index.html',
         error=error,
         qr_image_url=qr_image_url,
         pending_filename=pending_name,
-        pending_file_id=pending_id
+        pending_file_id=pending_id,
+        gdoc_url_to_populate=gdoc_url_to_populate
     )
 
 @main_bp.route('/refs/<ref_id>')
@@ -511,6 +498,7 @@ def download_references(ref_id):
 def verify():
     # If user is already verified, skip straight to index
     if session.get('email_verified') or session.get('phone_verified'):
+        flash('You are already verified.', 'info')
         return redirect(url_for('main.index'))
 
     if request.method == 'POST':
@@ -524,7 +512,7 @@ def verify():
             session['pending_email']  = email   # remember which addr
 
             send_verification_email(email, code)
-            flash('Verification code sent to your email.')
+            flash('Verification code sent to your email.', 'info')
             return redirect(url_for('main.verify_code'))
 
         elif phone:
@@ -533,7 +521,7 @@ def verify():
             session['phone_verified'] = False
 
             send_verification_sms(phone, code)
-            flash('Verification code sent to your phone.')
+            flash('Verification code sent to your phone.', 'info')
             return redirect(url_for('main.verify_code'))
 
     return render_template('verify.html')
@@ -546,7 +534,7 @@ def verify_code():
         # Email code matches
         if entered_code == session.get('email_code'):
             session['email_verified'] = True
-            flash('Email successfully verified!')
+            flash('Email successfully verified!', 'success')
 
             # Save to DB once, if not already there
             email = session.pop('pending_email', None)
@@ -557,9 +545,9 @@ def verify_code():
         # Phone code matches
         elif entered_code == session.get('phone_code'):
             session['phone_verified'] = True
-            flash('Phone number successfully verified!')
+            flash('Phone number successfully verified!', 'success')
         else:
-            flash('Invalid verification code.')
+            flash('Invalid verification code.', 'error')
 
         return redirect(url_for('main.index'))
 
