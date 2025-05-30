@@ -13,6 +13,7 @@ from database import save_verified_email
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime, timedelta
+import re
 
 main_bp = Blueprint('main', __name__)
 
@@ -69,6 +70,18 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
 
+def is_valid_google_doc_url(url):
+    """Validate if a URL is a valid Google Docs URL.
+    
+    Args:
+        url (str): The URL to validate
+        
+    Returns:
+        bool: True if the URL is a valid Google Docs URL, False otherwise
+    """
+    # Basic pattern for Google Docs URLs
+    pattern = r'^https://docs\.google\.com/document/d/[a-zA-Z0-9_-]+(/edit)?(/.*)?$'
+    return bool(re.match(pattern, url))
 
 @main_bp.route('/', methods=['GET', 'POST'])
 def index():
@@ -209,8 +222,8 @@ def index():
         # 4) Verified → handle Google‑Doc
         gdoc_url = request.form.get('gdoc_url', '').strip()
         if gdoc_url:
-            if 'docs.google.com' not in gdoc_url:
-                error = 'Please provide a valid Google Docs URL'
+            if not is_valid_google_doc_url(gdoc_url):
+                error = 'Please provide a valid Google Docs URL (e.g., https://docs.google.com/document/d/1234567890/edit)'
                 return render_template('index.html', error=error)
 
             ref_id = str(uuid.uuid4())
