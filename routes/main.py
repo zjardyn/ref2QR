@@ -390,6 +390,17 @@ def show_references(ref_id):
             border-radius: 5px;
             background-color: #f9f9f9;
             border-left: 4px solid #3498db;
+            counter-increment: ref-counter;
+            position: relative;
+            padding-left: 40px;
+        }
+        .reference::before {
+            content: counter(ref-counter) ". ";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-weight: bold;
+            color: #3498db;
         }
         .authors {
             font-weight: bold;
@@ -428,7 +439,7 @@ def show_references(ref_id):
     <h1>Reference List</h1>
     <div id="references">
 """
-    for entry in entries:
+    for i, entry in enumerate(entries):
         cleaned_data = clean_and_structure_entry(entry)
         journal_val = cleaned_data.get('journal')
         volume_val = cleaned_data.get('volume')
